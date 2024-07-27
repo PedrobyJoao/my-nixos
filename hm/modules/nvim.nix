@@ -47,8 +47,8 @@
     extraLuaConfig = ''
       vim.g.mapleader = ' '
       ${builtins.readFile ../nvim/configs/telescope.lua}
-      ${builtins.readFile ../nvim/configs/keybinds.lua}
-      ${builtins.readFile ../nvim/configs/settings.lua}
+      ${builtins.readFile ../nvim/keybinds.lua}
+      ${builtins.readFile ../nvim/settings.lua}
     '';
   };
 }
