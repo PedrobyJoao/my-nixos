@@ -13,18 +13,24 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-
+    
     plugins = with pkgs.vimPlugins; [
+        {
+            plugin = gruvbox-nvim;
+            config = builtins.readFile ../nvim/configs/gruvbox.lua;
+            type = "lua";
+        }
 
-      {
-        plugin = gruvbox-nvim;
-        config = toLuaFile ../nvim/configs/gruvbox.lua;
-      }
+        {
+            plugin = telescope-nvim;
+        }
 
-      {
-        plugin = telescope-nvim;
-        config = toLuaFile ../nvim/configs/telescope.lua;
-      }
+        {
+            plugin = nvim-tree-lua;
+            config = builtins.readFile ../nvim/configs/nvim-tree.lua;
+            type = "lua";
+        }
+
 
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -37,7 +43,6 @@
           p.tree-sitter-python
           p.tree-sitter-json
         ]));
-        config = toLuaFile ../nvim/configs/treesitter.lua;
       }
 
     ];
@@ -45,10 +50,11 @@
     # for some reasons some configs are not being loaded from plugins `config`
     # files, so I'll just write the lua code below.
     extraLuaConfig = ''
-      vim.g.mapleader = ' '
-      ${builtins.readFile ../nvim/configs/telescope.lua}
-      ${builtins.readFile ../nvim/keybinds.lua}
-      ${builtins.readFile ../nvim/settings.lua}
+            vim.g.mapleader = ' '
+            ${builtins.readFile ../nvim/configs/treesitter.lua}
+            ${builtins.readFile ../nvim/configs/telescope.lua}
+            ${builtins.readFile ../nvim/keybinds.lua}
+            ${builtins.readFile ../nvim/settings.lua}
     '';
   };
 }

@@ -1,12 +1,12 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "help", "bash", "go", "lua", "c", "javascript", "json", "python", "typescript", "tsx", "css", "rust", "java", "yaml", "markdown", "markdown_inline" }, -- one of "all" or a list of languages
+    -- ensure_installed = { "help", "bash", "go", "lua", "c", "javascript", "json", "python", "typescript", "tsx", "css", "rust", "java", "yaml", "markdown", "markdown_inline" }, -- one of "all" or a list of languages
 
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+    -- -- Install parsers synchronously (only applied to `ensure_installed`)
+    -- sync_install = false,
 
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-    auto_install = true,
+    auto_install = false,
 
     ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
 
@@ -25,5 +25,5 @@ require'nvim-treesitter.configs'.setup {
         enable = true,
     },
 
-    indent = { enable = true, disable = { "python", "css" } },
+    indent = { enable = true, disable = { "python", "css", "yaml" } },
 }
