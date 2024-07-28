@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./modules/git.nix ./modules/nvim.nix ./modules/zsh.nix ];
+  imports = [
+    ./modules/git.nix
+    ./modules/nvim.nix
+    ./modules/zsh.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "orolo";
   home.homeDirectory = "/home/orolo";
+
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -71,21 +77,21 @@
     EDITOR = "nvim";
   };
 
-    programs.bash = {
-        enable = true;
-        shellAliases = {
-            nixevalstrict = "nix-instantiate --eval --strict";
-            nixeval = "nix-instantiate --eval";
-            v = "nvim";
-            ll = "ls -l";
-            la = "ls -a";
-            l = "ls -CF";
-        };
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      nixevalstrict = "nix-instantiate --eval --strict";
+      nixeval = "nix-instantiate --eval";
+      v = "nvim";
+      ll = "ls -l";
+      la = "ls -a";
+      l = "ls -CF";
     };
-    programs.ripgrep = {
-        enable = true;
-    };
+  };
 
+  programs.lazygit = {
+    enable = true;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

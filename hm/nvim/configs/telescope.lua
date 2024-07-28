@@ -44,3 +44,5 @@ map('n', '<leader>gc', builtin.git_commits, {})
 map('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
+
+-- helpful note: `:Telescope keymaps` to see keymaps being used

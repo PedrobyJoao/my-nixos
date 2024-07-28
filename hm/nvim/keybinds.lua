@@ -36,6 +36,10 @@ map("v", "p", '"_dP', opts)
 -- Nohl command to CRTL + N
 map('n', '<C-N>', ':nohl<CR>')
 
+-- Comment
+map("n", "<leader>/", "gcc")
+map("v", "<leader>/", "gc")
+
 -- Indent with tab
 map("v", "<S-Tab>", "<gv")
 map("v", "<Tab>", ">gv")
@@ -73,12 +77,6 @@ map('x', 'A', ':<C-U>normal! ggVG<CR>')
 
 -- Open QuickFix list
 map('n', '<leader>lf', ':lua vim.diagnostic.setqflist()<CR>')
-
----------------------- Open Custom apps ----------------------
-map('v', '<C-g>', ':<C-u>ChatGPTEditWithInstructions<CR>gv')
-map('n', '<C-g>', ':ChatGPTEditWithInstructions<CR>')
-map('v', '<C-p>', ':ChatGPTRun ')
-map('n', '<C-p>', ':ChatGPTRun ')
 
 ---------------------- Files ----------------------
 
