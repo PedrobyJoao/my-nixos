@@ -3,7 +3,7 @@ local conform = require("conform")
 conform.setup({
 	formatters_by_ft = {
 		nix = { "nixfmt", "nixpkgs_fmt" },
-		golang = { "gofumpt", "goimports-reviser" },
+		go = { "gofumpt", "goimports-reviser" },
 		lua = { "stylua" },
 		rust = { "rustfmt" },
 		python = { "black" },
