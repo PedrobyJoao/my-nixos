@@ -1,84 +1,197 @@
-local lsp = require("lsp-zero")
+-- inspired by: https://github.com/virchau13/dots/blob/9eec548da8e72c5f2b41cdeb40e983dcc91aefd1/apps/nvim/lua/lsp.lua
+-- https://github.com/fmoda3/nix-configs/blob/master/home/nvim/config/lua/lsp-config.lua
 
-lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'lua_ls',
+local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap = true, silent = true }
+
+    buf_set_keymap("n", "<Leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    buf_set_keymap("n", "<Leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+    buf_set_keymap("n", "<Leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+    buf_set_keymap("n", "<Leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+    buf_set_keymap("n", "<Leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+    buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    buf_set_keymap(
+        "n",
+        "<Leader>vd",
+        '<cmd>lua vim.diagnostic.open_float(0, { scope = "line", border = "single" })<CR>',
+        opts
+    )
+    buf_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ float =  { border = "single" }})<CR>', opts)
+    buf_set_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ float =  { border = "single" }})<CR>', opts)
+end
+
+local lsp = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Enable Language Servers
+local function default_lsp_setup(module)
+    lsp[module].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+    })
+end
+
+-- Nix
+lsp.nil_ls.setup({
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+
+        -- Let statix format
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
+    end,
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+-- Go
+default_lsp_setup("gopls")
+
+-- Lua
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+lsp.lua_ls.setup({
     settings = {
         Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+                -- Setup your lua path
+                path = runtime_path,
+            },
+            completion = {
+                callSnippet = "Replace",
+            },
             diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
-vim.cmd [[ autocmd BufWritePre *.go lua vim.lsp.buf.formatting() ]]
--- vim.cmd [[ autocmd BufWritePre *.go lua goimports(1000) ]]
+-- Python
+default_lsp_setup("pyright")
 
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
+-- Typescript
+-- nvim_lsp.tsserver.setup({
+-- 	init_options = require("nvim-lsp-ts-utils").init_options,
+-- 	on_attach = function(client, bufnr)
+-- 		on_attach(client, bufnr)
+--
+-- 		-- Let eslint format
+-- 		client.server_capabilities.document_formatting = false
+-- 		client.server_capabilities.document_range_formatting = false
+--
+-- 		local ts_utils = require("nvim-lsp-ts-utils")
+-- 		ts_utils.setup({
+-- 			enable_import_on_completion = true,
+-- 		})
+-- 		ts_utils.setup_client(client)
+--
+-- 		-- Mappings.
+-- 		local opts = { noremap = true, silent = true, buffer = true }
+-- 		require("legendary").keymaps({
+-- 			{ "gto", ":TSLspOrganize<CR>", description = "LSP: Organize imports", opts = opts },
+-- 			{ "gtr", ":TSLspRenameFile<CR>", description = "LSP: Rename file", opts = opts },
+-- 			{ "gti", ":TSLspImportAll<CR>", description = "LSP: Import missing imports", opts = opts },
+-- 		})
+-- 	end,
+-- 	capabilities = capabilities,
+-- })
+
+-- web
+-- ESLint
+lsp.eslint.setup({
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        -- Run all eslint fixes on save
+        vim.cmd([[
+            augroup EslintOnSave
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> EslintFixAll
+            augroup END
+            ]])
+    end,
+    capabilities = capabilities,
 })
+-- CSS
+default_lsp_setup("cssls")
+-- HTML
+default_lsp_setup("html")
+-- JSON
+default_lsp_setup("jsonls")
 
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
+-- Null
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        -- go
+        null_ls.builtins.diagnostics.golanci_lint,
+        -- null_ls.builtins.formatting.gofumpt,
+        -- null_ls.builtins.formatting.goimports_reviser,
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+        -- Nix
+        -- null_ls.builtins.formatting.nixfmt,
+        -- null_ls.builtins.formatting.nixpkgs_fmt,
+        null_ls.builtins.diagnostics.statix,
+        null_ls.builtins.code_actions.statix,
+    },
 })
-
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
-})
-
-lsp.on_attach(function(client, bufnr)
-  local opts = {buffer = bufnr, remap = false}
-
-  if client.name == "eslint" then
-      vim.cmd.LspStop('eslint')
-      return
-  end
-
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-end)
-
-lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true,
 })
 
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--     vim.lsp.diagnostic.on_publish_diagnostics, {
+--         virtual_text = false,
+--         underline = false
+--     }
+-- )
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        underline = false
-    }
-)
+-- cmp
+-- local cmp = require('cmp')
+-- local cmp_select = { behavior = cmp.SelectBehavior.Select }
+-- local cmp_mappings = lsp.defaults.cmp_mappings({
+--     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+--     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+--     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+--     ["<C-Space>"] = cmp.mapping.complete(),
+-- })
+--
+-- -- disable completion with tab
+-- -- this helps with copilot setup
+-- cmp_mappings['<Tab>'] = nil
+-- cmp_mappings['<S-Tab>'] = nil
+--
+-- lsp.setup_nvim_cmp({
+--     mapping = cmp_mappings
+-- })

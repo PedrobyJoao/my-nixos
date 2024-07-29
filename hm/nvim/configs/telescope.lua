@@ -45,4 +45,9 @@ map('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
 
+map('n',
+    '<leader>p',
+    ':lua require"telescope.builtin".find_files({ prompt_title = "< Custom Search >", cwd = "~/path/to/your/folder" })<CR>'
+)
+
 -- helpful note: `:Telescope keymaps` to see keymaps being used
