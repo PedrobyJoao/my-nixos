@@ -30,10 +30,11 @@
       # icons (required for nvim-tree)
       nvim-web-devicons
 
-      nvim-cmp
       luasnip
       cmp-nvim-lsp
+      nvim-cmp
       none-ls-nvim
+      lspkind-nvim
       {
         plugin = nvim-lspconfig;
         config = builtins.readFile ../nvim/configs/lsp.lua;
