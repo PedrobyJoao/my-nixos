@@ -1,7 +1,8 @@
 Standalone Home-Manager for now, I may make it as a module in the future.
 
 TODOs:
-[] nvim
+[x] nvim (quite)
+[] zsh?
 [] tmux
 [] hyperland
 [] golang
