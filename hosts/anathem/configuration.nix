@@ -2,19 +2,23 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix = {
-   package = pkgs.nixFlakes;
-   extraOptions = ''
-     experimental-features = nix-command flakes
-   '';
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -41,6 +45,13 @@
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
 
+  # virtualisation
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
@@ -58,9 +69,6 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -83,16 +91,15 @@
       isNormalUser = true;
       extraGroups = [
         "wheel"
-	"saunt"
+        "saunt"
+        "docker"
       ];
       openssh.authorizedKeys.keys = [
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmXowNxl6Ie/7QFFGBXSs9qtjqgcSAp1LS8TVm1uISB"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmXowNxl6Ie/7QFFGBXSs9qtjqgcSAp1LS8TVm1uISB"
       ];
     };
     root = {
-      extraGroups = [
-        "wheel"
-      ];
+      extraGroups = [ "wheel" ];
     };
   };
 
@@ -127,7 +134,6 @@
     KbdInteractiveAuthentication = false;
   };
 
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -158,4 +164,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-
