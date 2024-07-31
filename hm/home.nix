@@ -31,6 +31,9 @@
     go
     gotools
 
+    # dev-tools
+    aichat
+
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
 
@@ -103,7 +106,7 @@
 
   programs.starship = {
     enable = true;
-    settings = pkgs.lib.importTOML ./extra/starship.toml;
+    settings = pkgs.lib.importTOML ./extras/starship.toml;
   };
 
   programs.lazygit = {
