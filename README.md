@@ -66,5 +66,6 @@ Possibility: instantiate Aider within a dev shell together with project's nix sh
 
 - important: https://discourse.nixos.org/t/50-packaging-bound-aider/49867/4
 - https://src.thehellings.com/greg/aider-flake
+- https://github.com/jbotwell/nixaider
 - https://github.com/cognivore/flake-aider-chat/blob/main/flake.nix
 - https://github.com/paul-gauthier/aider/pull/608
