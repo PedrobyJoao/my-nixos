@@ -31,7 +31,6 @@
     };
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
     };
   };
 
@@ -41,15 +40,26 @@
     hostName = "anathem";
   };
 
-  # QEMU-specific
-  services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
-
   # virtualisation
   virtualisation.docker.enable = true;
   virtualisation.docker.rootless = {
     enable = true;
     setSocketVariable = true;
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    # Electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   # Set your time zone.
@@ -140,11 +150,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -161,6 +166,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "23.11"; # Did you read the comment?
-
+  system.stateVersion = "24.05"; # Did you read the comment?
 }

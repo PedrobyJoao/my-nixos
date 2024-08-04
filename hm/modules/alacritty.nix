@@ -24,7 +24,7 @@
         multiplier = 3;
       };
 
-      draw_bold_text_with_bright_colors = true;
+      # draw_bold_text_with_bright_colors = true;
 
       selection = {
         save_to_clipboard = false;
@@ -46,13 +46,13 @@
         size = 12.0;
       };
 
-      shell = {
-        program = "zsh";
-        args = [
-          "-C"
-          "neofetch"
-        ];
-      };
+      # shell = {
+      #   program = "bash";
+      #   args = [
+      #     "-C"
+      #     "neofetch"
+      #   ];
+      # };
 
     };
   };

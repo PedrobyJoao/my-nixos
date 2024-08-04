@@ -5,6 +5,7 @@
     ./modules/git.nix
     ./modules/nvim.nix
     ./modules/alacritty.nix
+    ./modules
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -39,6 +40,9 @@
 
     # fun
     neofetch
+
+    brave
+    kitty
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -94,6 +98,8 @@
   programs.bash = {
     enable = true;
     shellAliases = {
+      hms = "home-manager switch --flake /home/orolo/my-nixos/hm/";
+      nixswitch = "sudo nixos-rebuild switch --flake /home/orolo/my-nixos/";
       nixevalstrict = "nix-instantiate --eval --strict";
       nixeval = "nix-instantiate --eval";
       gs = "git status";
