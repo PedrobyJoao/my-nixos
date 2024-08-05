@@ -7,12 +7,20 @@ TODOs:
 - [x] aichat
 - [ ] WM and dev environment
   - [x] minimal hyprland
-  - [ ] waybar
   - [ ] minimal rofi drun
+  - [ ] waybar
   - [ ] nmapplet, blueman (accessible by waybar and rofi)
+  - [ ] file explorer UI
+  - [ ] settings UI
   - [ ] zoom
   - [ ] slack
+  - [ ] random wallpapers
 - [ ] tmux
+  - [ ] gruvbox light theme as nvim
+  - [ ] ressurection?
+- [ ] codeium
+- [ ] coq env and necessary tools for Software Foundations
+- [ ] hibernate
 - [ ] aider // WAIT: a nixpkg is being created for it
 
 ## Dev
@@ -52,6 +60,7 @@ pkgs.mkShell {
 TODOs:
 
 - [ ] Codeium
+- [ ] copy and paste between terminals
 - [ ] Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
 
 ### Aichat

@@ -34,15 +34,18 @@
 
     # dev-tools
     aichat
+    htop
+    tree
+    rofi-wayland
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # fun
     neofetch
 
     brave
-    kitty
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

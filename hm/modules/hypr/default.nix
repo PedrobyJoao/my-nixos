@@ -39,7 +39,7 @@
 
       # Input config
       input {
-          kb_layout = br,us
+          kb_layout = us, br
           kb_variant =
           kb_model =
           kb_options =
@@ -104,32 +104,23 @@
           workspace_swipe = false
       }
 
-      # windowrule=float,^(kitty)$
-      windowrule=float,^(pavucontrol)$
-      # windowrule=center,^(kitty)$
+      windowrule=center,^(rofi)$
+      windowrule=float,^(rofi)$
       windowrule=float,^(blueman-manager)$
-      # windowrule=size 600 500,^(kitty)$
-      windowrule=size 934 525,^(mpv)$
-      windowrule=float,^(mpv)$
-      windowrule=center,^(mpv)$
-      #windowrule=pin,^(firefox)$
 
       $mainMod = SUPER
-      bind = $mainMod, G, fullscreen,
+      bind = $mainMod, M, fullscreen,
 
 
-      #bind = $mainMod, RETURN, exec, cool-retro-term-zsh
-      bind = $mainMod, T, exec, kitty
-      bind = $mainMod, B, exec, opera --no-sandbox
-      bind = $mainMod, L, exec, brave 
+      bind = $mainMod, RETURN, exec, alacritty
+      bind = $mainMod, R, exec, rofi -show drun -show-icons
+      bind = $mainMod, B, exec, brave 
       bind = $mainMod, Q, killactive,
-      bind = $mainMod, M, exit,
+      bind = $mainMod SHIFT, Q, exit,
       bind = $mainMod, F, exec, nautilus
       bind = $mainMod, V, togglefloating,
-      bind = $mainMod, w, exec, wofi --show drun
-      bind = $mainMod, R, exec, rofiWindow
       bind = $mainMod, P, pseudo, # dwindle
-      bind = $mainMod, J, togglesplit, # dwindle
+      # bind = $mainMod, J, togglesplit, # dwindle
 
       # Switch Keyboard Layouts
       # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
@@ -152,10 +143,10 @@
       bind = SUPER,Tab,bringactivetotop,
 
       # Move focus with mainMod + arrow keys
-      bind = $mainMod, left, movefocus, l
-      bind = $mainMod, right, movefocus, r
-      bind = $mainMod, up, movefocus, u
-      bind = $mainMod, down, movefocus, d
+      bind = $mainMod, h, movefocus, l
+      bind = $mainMod, l, movefocus, r
+      bind = $mainMod, k, movefocus, u
+      bind = $mainMod, j, movefocus, d
 
       # Switch workspaces with mainMod + [0-9]
       bind = $mainMod, 1, workspace, 1
@@ -180,6 +171,18 @@
       bind = $mainMod SHIFT, 8, movetoworkspace, 8
       bind = $mainMod SHIFT, 9, movetoworkspace, 9
       bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+      # resize
+        bind = $mainMod SHIFT CTRL, l, exec, hyprctl dispatch resizeactive 10 0
+        bind = $mainMod SHIFT CTRL, h, exec, hyprctl dispatch resizeactive -10 0
+        bind = $mainMod SHIFT CTRL, k, exec, hyprctl dispatch resizeactive 0 -10
+        bind= $mainMod SHIFT CTRL, j, exec, hyprctl dispatch resizeactive 0 10
+
+        bind = $mainMod SHIFT, h, exec, hyprctl dispatch movewindow l
+        bind = $mainMod SHIFT, l, exec, hyprctl dispatch movewindow r
+        bind = $mainMod SHIFT, j, exec, hyprctl dispatch movewindow d
+        bind = $mainMod SHIFT, k, exec, hyprctl dispatch movewindow u
+
 
       # Scroll through existing workspaces with mainMod + scroll
       bind = $mainMod, mouse_down, workspace, e+1

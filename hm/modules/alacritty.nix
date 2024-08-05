@@ -10,8 +10,8 @@
     settings = {
       window = {
         padding = {
-          x = 5;
-          y = 5;
+          x = 3;
+          y = 3;
         };
         class = {
           instance = "Alacritty";
@@ -45,16 +45,6 @@
         };
         size = 12.0;
       };
-
-      # shell = {
-      #   program = "bash";
-      #   args = [
-      #     "-C"
-      #     "neofetch"
-      #   ];
-      # };
-
     };
   };
-
 }
