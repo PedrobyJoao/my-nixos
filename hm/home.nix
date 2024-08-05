@@ -37,6 +37,7 @@
     htop
     tree
     rofi-wayland
+    wl-clipboard
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
