@@ -42,10 +42,20 @@
     (nerdfonts.override { fonts = [ "Hack" ]; })
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
+    # sensible computer tools 
+    blueman
+    networkmanagerapplet
+    pavucontrol
+
+    # work tools
+    google-chrome
+    slack
+
+    # others
+    brave
+
     # fun
     neofetch
-
-    brave
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

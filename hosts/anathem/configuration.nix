@@ -23,6 +23,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # boot
   boot.loader = {
     grub = {
       enable = true;
@@ -39,6 +40,10 @@
     networkmanager.enable = true;
     hostName = "anathem";
   };
+
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   # virtualisation
   virtualisation.docker.enable = true;
@@ -66,6 +71,8 @@
   time.timeZone = "America/Sao_Paulo";
 
   # sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

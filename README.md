@@ -2,26 +2,35 @@ Standalone Home-Manager for now, I may make it as a module in the future.
 
 TODOs:
 
-- [x] nvim (quite)
+- [x] nvim (quite, enough)
 - [x] golang (see details below)
 - [x] aichat
 - [ ] WM and dev environment
   - [x] minimal hyprland
-  - [ ] minimal rofi drun
+  - [x] minimal rofi drun
+  - [x] blueman (accessable by rofi)
+  - [x] slack
+  - [x] sound GUI? pipewire has one?
+  - [x] zoom (try browser version first)
+  - [ ] network manage GUI
   - [ ] waybar
-  - [ ] nmapplet, blueman (accessible by waybar and rofi)
-  - [ ] file explorer UI
-  - [ ] settings UI
-  - [ ] zoom
-  - [ ] slack
+  - [ ] file explorer GUI
+  - [ ] settings GUI (did I ever use this back on popos?)
   - [ ] random wallpapers
 - [ ] tmux
   - [ ] gruvbox light theme as nvim
   - [ ] ressurection?
+- [ ] screenshot by keybind (see my old config)
+- [ ] brightness control (GUI or cli again?)
 - [ ] codeium
 - [ ] coq env and necessary tools for Software Foundations
-- [ ] hibernate
 - [ ] aider // WAIT: a nixpkg is being created for it
+
+Cool but not urgent:
+
+- [ ] random wallpapers
+- [ ] hibernate
+- [ ] hyprland start one terminal
 
 ## Dev
 
