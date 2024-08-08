@@ -36,15 +36,18 @@
     aichat
     htop
     tree
-    rofi-wayland
-    wl-clipboard
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
-    # sensible computer tools 
-    blueman
+    # desktop env tools
+    rofi-wayland
+    wl-clipboard
+    dunst
+    nemo
+
+    # net, bluetooth, sounds... 
     networkmanagerapplet
     pavucontrol
 
@@ -121,6 +124,8 @@
       ll = "ls -l";
       la = "ls -a";
       l = "ls -CF";
+      tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
+      dmscd = "cd ~/lab/nunet/device-management-service";
     };
   };
 
