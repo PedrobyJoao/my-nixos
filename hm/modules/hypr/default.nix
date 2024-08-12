@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     waybar
     swww
+    wlr-randr
   ];
 
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
@@ -19,7 +20,7 @@
     extraConfig = ''
 
       # Monitor
-      monitor=,preferred,auto,auto
+      monitor=eDP-1,1920x1200,0x0,1.25
 
       # Fix slow startup
       # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -28,7 +29,7 @@
       # Autostart
 
       # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
-      # exec-once = dunst
+      exec-once = dunst
 
       source = /home/orolo/.config/hypr/colors
       # exec = pkill waybar & sleep 0.5 && waybar &
@@ -45,7 +46,7 @@
           kb_options =
           kb_rules =
 
-          follow_mouse = 1
+          follow_mouse = 0
 
           touchpad {
               natural_scroll = false
