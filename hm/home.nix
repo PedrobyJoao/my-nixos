@@ -34,6 +34,7 @@
 
     # dev-tools
     aichat
+    master.aider-chat
     htop
     tree
 
@@ -46,6 +47,7 @@
     wl-clipboard
     dunst
     nemo
+    swaylock
 
     # net, bluetooth, sounds... 
     networkmanagerapplet
@@ -126,6 +128,7 @@
       l = "ls -CF";
       tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
       dmscd = "cd ~/lab/nunet/device-management-service";
+      vdots = "nvim ~/my-nixos";
     };
   };
 
