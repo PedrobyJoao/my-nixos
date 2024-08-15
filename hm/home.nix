@@ -127,6 +127,7 @@
       la = "ls -a";
       l = "ls -CF";
       tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
+      aider = "aider --no-auto-commits -c ~/.config/aider/config.yaml";
       dmscd = "cd ~/lab/nunet/device-management-service";
       vdots = "nvim ~/my-nixos";
     };
