@@ -5,7 +5,10 @@
 }:
 
 {
-  imports = [ ./hyprland-environment.nix ];
+  imports = [
+    ./hyprland-environment.nix
+    ./hyprlock.nix
+  ];
 
   home.packages = with pkgs; [
     waybar
@@ -110,11 +113,10 @@
       windowrule=float,^(blueman-manager)$
 
       $mainMod = SUPER
+
       bind = $mainMod, M, fullscreen, 1
-
-
       bind = $mainMod, RETURN, exec, alacritty
-      bind = $mainMod, R, exec, rofi -show drun -show-icons
+      bind = $mainMod, D, exec, rofi -show drun -show-icons
       bind = $mainMod, B, exec, brave 
       bind = $mainMod, Q, killactive,
       bind = $mainMod SHIFT, Q, exit,
@@ -122,6 +124,10 @@
       bind = $mainMod, V, togglefloating,
       bind = $mainMod, P, pseudo, # dwindle
       # bind = $mainMod, J, togglesplit, # dwindle
+
+      # hyprlock
+      bind = $mainMod, C, exec, hyprlock
+      bindl=,switch:Lid Switch, exec, hyprlock
 
       # Switch Keyboard Layouts
       # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
