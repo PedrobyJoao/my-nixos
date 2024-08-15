@@ -110,7 +110,7 @@
       windowrule=float,^(blueman-manager)$
 
       $mainMod = SUPER
-      bind = $mainMod, M, fullscreen,
+      bind = $mainMod, M, fullscreen, 1
 
 
       bind = $mainMod, RETURN, exec, alacritty
