@@ -3,8 +3,8 @@
 , pkgs
 , ...
 }:
-
 {
+  imports = [ ./colors.nix ];
   programs.waybar = {
     enable = true;
     settings = [
@@ -131,20 +131,11 @@
           all-outputs = true;
           format-icons = {
             "1" = "";
-            "2" = "www";
+            "2" = "web";
             "3" = "work";
             "4" = "四";
             "5" = "五";
             "6" = "六";
-          };
-          "persistent-workspaces" = {
-            "*" = [
-              1
-              2
-              3
-              4
-              5
-            ];
           };
         };
 
@@ -192,12 +183,5 @@
         };
       }
     ];
-
-    style = ''
-      #workspaces button.active {
-          background-color: #b58900;
-          color: #002b36;
-      }
-    '';
   };
 }
