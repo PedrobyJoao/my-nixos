@@ -8,6 +8,7 @@
   imports = [
     ./hyprland-environment.nix
     ./hyprlock.nix
+    ./hypridle.nix
   ];
 
   home.packages = with pkgs; [
@@ -22,183 +23,183 @@
     systemd.enable = true;
     extraConfig = ''
 
-      # Monitor
-      monitor=eDP-1,1920x1200,0x0,1.25
+        # Monitor
+        monitor=eDP-1,1920x1200,0x0,1.50
 
-      # Fix slow startup
-      # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+        # Fix slow startup
+        # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
 
-      # Autostart
+        # Autostart
 
-      # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
-      exec-once = dunst
+        # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+        exec-once = dunst
 
-      source = /home/orolo/.config/hypr/colors
-      # exec = pkill waybar & sleep 0.5 && waybar &
-      # exec-once = swww init & sleep 0.5 && exec wallpaper_random
-      # exec-once = wallpaper_random
+        source = /home/orolo/.config/hypr/colors
+        # exec = pkill waybar & sleep 0.5 && waybar &
+        # exec-once = swww init & sleep 0.5 && exec wallpaper_random
+        # exec-once = wallpaper_random
 
-      # Set en layout at startup
+        # Set en layout at startup
 
-      # Input config
-      input {
-          kb_layout = us, br
-          kb_variant =
-          kb_model =
-          kb_options =
-          kb_rules =
+        # Input config
+        input {
+            kb_layout = us, br
+            kb_variant =
+            kb_model =
+            kb_options =
+            kb_rules =
 
-          follow_mouse = 0
+            follow_mouse = 0
 
-          touchpad {
-              natural_scroll = false
-          }
+            touchpad {
+                natural_scroll = false
+            }
 
-          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-      }
+            sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+        }
 
-      general {
+        general {
 
-          gaps_in = 5
-          gaps_out = 20
-          border_size = 2
-          col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-          col.inactive_border = rgba(595959aa)
+            gaps_in = 5
+            gaps_out = 20
+            border_size = 2
+            col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+            col.inactive_border = rgba(595959aa)
 
-          layout = dwindle
-      }
+            layout = dwindle
+        }
 
-      # decoration {
+        # decoration {
 
-      #     rounding = 10
-      #     blur = true
-      #     blur_size = 3
-      #     blur_passes = 1
-      #     blur_new_optimizations = true
+        #     rounding = 10
+        #     blur = true
+        #     blur_size = 3
+        #     blur_passes = 1
+        #     blur_new_optimizations = true
 
-      #     drop_shadow = true
-      #     shadow_range = 4
-      #     shadow_render_power = 3
-      #     col.shadow = rgba(1a1a1aee)
-      # }
+        #     drop_shadow = true
+        #     shadow_range = 4
+        #     shadow_render_power = 3
+        #     col.shadow = rgba(1a1a1aee)
+        # }
 
-      animations {
-          enabled = yes
+        animations {
+            enabled = yes
 
-          bezier = ease,0.4,0.02,0.21,1
+            bezier = ease,0.4,0.02,0.21,1
 
-          animation = windows, 1, 3.5, ease, slide
-          animation = windowsOut, 1, 3.5, ease, slide
-          animation = border, 1, 6, default
-          animation = fade, 1, 3, ease
-          animation = workspaces, 1, 3.5, ease
-      }
+            animation = windows, 1, 3.5, ease, slide
+            animation = windowsOut, 1, 3.5, ease, slide
+            animation = border, 1, 6, default
+            animation = fade, 1, 3, ease
+            animation = workspaces, 1, 3.5, ease
+        }
 
-      dwindle {
-          pseudotile = yes
-          preserve_split = yes
-      }
+        dwindle {
+            pseudotile = yes
+            preserve_split = yes
+        }
 
-      # master {
-      #     new_is_master = yes
-      # }
+        # master {
+        #     new_is_master = yes
+        # }
 
-      gestures {
-          workspace_swipe = false
-      }
+        gestures {
+            workspace_swipe = false
+        }
 
-      windowrule=center,^(rofi)$
-      windowrule=float,^(rofi)$
-      windowrule=float,^(blueman-manager)$
+        windowrule=center,^(rofi)$
+        windowrule=float,^(rofi)$
+        windowrule=float,^(blueman-manager)$
 
-      $mainMod = SUPER
+        $mainMod = SUPER
 
-      bind = $mainMod, M, fullscreen, 1
-      bind = $mainMod, RETURN, exec, alacritty
-      bind = $mainMod, D, exec, rofi -show drun -show-icons
-      bind = $mainMod, B, exec, brave 
-      bind = $mainMod, Q, killactive,
-      bind = $mainMod SHIFT, Q, exit,
-      bind = $mainMod, F, exec, nautilus
-      bind = $mainMod, V, togglefloating,
-      bind = $mainMod, P, pseudo, # dwindle
-      # bind = $mainMod, J, togglesplit, # dwindle
+        bind = $mainMod, M, fullscreen, 1
+        bind = $mainMod, RETURN, exec, alacritty
+        bind = $mainMod, D, exec, rofi -show drun -show-icons
+        bind = $mainMod, B, exec, brave 
+        bind = $mainMod, Q, killactive,
+        bind = $mainMod SHIFT, Q, exit,
+        bind = $mainMod, F, exec, nautilus
+        bind = $mainMod, V, togglefloating,
+        bind = $mainMod, P, pseudo, # dwindle
+        # bind = $mainMod, J, togglesplit, # dwindle
 
-      # hyprlock
-      bind = $mainMod, C, exec, hyprlock
-      bindl=,switch:Lid Switch, exec, hyprlock
+        # hyprlock
+        bind = $mainMod, C, exec, hyprlock
+        bindl=,switch:Lid Switch, exec, hyprlock
 
-      # Switch Keyboard Layouts
-      # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
+        # Switch Keyboard Layouts
+        # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
 
-      bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
-      bind = SHIFT, Print, exec, grim -g "$(slurp)"
+        bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
+        bind = SHIFT, Print, exec, grim -g "$(slurp)"
 
-      # Functional keybinds
-      bind =,XF86AudioMicMute,exec,pamixer --default-source -t
-      bind =,XF86MonBrightnessDown,exec,light -U 20
-      bind =,XF86MonBrightnessUp,exec,light -A 20
-      bind =,XF86AudioMute,exec,pamixer -t
-      bind =,XF86AudioLowerVolume,exec,pamixer -d 10
-      bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
-      bind =,XF86AudioPlay,exec,playerctl play-pause
-      bind =,XF86AudioPause,exec,playerctl play-pause
+        # Functional keybinds
+        bind =,XF86AudioMicMute,exec,pamixer --default-source -t
+        bind =,XF86MonBrightnessDown,exec,light -U 20
+        bind =,XF86MonBrightnessUp,exec,light -A 20
+        bind =,XF86AudioMute,exec,pamixer -t
+        bind =,XF86AudioLowerVolume,exec,pamixer -d 10
+        bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
+        bind =,XF86AudioPlay,exec,playerctl play-pause
+        bind =,XF86AudioPause,exec,playerctl play-pause
 
-      # to switch between windows in a floating workspace
-      bind = SUPER,Tab,cyclenext,
-      bind = SUPER,Tab,bringactivetotop,
+        # to switch between windows in a floating workspace
+        bind = SUPER,Tab,cyclenext,
+        bind = SUPER,Tab,bringactivetotop,
 
-      # Move focus with mainMod + arrow keys
-      bind = $mainMod, h, movefocus, l
-      bind = $mainMod, l, movefocus, r
-      bind = $mainMod, k, movefocus, u
-      bind = $mainMod, j, movefocus, d
+        # Move focus with mainMod + arrow keys
+        bind = $mainMod, h, movefocus, l
+        bind = $mainMod, l, movefocus, r
+        bind = $mainMod, k, movefocus, u
+        bind = $mainMod, j, movefocus, d
 
-      # Switch workspaces with mainMod + [0-9]
-      bind = $mainMod, 1, workspace, 1
-      bind = $mainMod, 2, workspace, 2
-      bind = $mainMod, 3, workspace, 3
-      bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, 5, workspace, 5
-      bind = $mainMod, 6, workspace, 6
-      bind = $mainMod, 7, workspace, 7
-      bind = $mainMod, 8, workspace, 8
-      bind = $mainMod, 9, workspace, 9
-      bind = $mainMod, 0, workspace, 10
+        # Switch workspaces with mainMod + [0-9]
+        bind = $mainMod, 1, workspace, 1
+        bind = $mainMod, 2, workspace, 2
+        bind = $mainMod, 3, workspace, 3
+        bind = $mainMod, 4, workspace, 4
+        bind = $mainMod, 5, workspace, 5
+        bind = $mainMod, 6, workspace, 6
+        bind = $mainMod, 7, workspace, 7
+        bind = $mainMod, 8, workspace, 8
+        bind = $mainMod, 9, workspace, 9
+        bind = $mainMod, 0, workspace, 10
 
-      # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      bind = $mainMod SHIFT, 1, movetoworkspace, 1
-      bind = $mainMod SHIFT, 2, movetoworkspace, 2
-      bind = $mainMod SHIFT, 3, movetoworkspace, 3
-      bind = $mainMod SHIFT, 4, movetoworkspace, 4
-      bind = $mainMod SHIFT, 5, movetoworkspace, 5
-      bind = $mainMod SHIFT, 6, movetoworkspace, 6
-      bind = $mainMod SHIFT, 7, movetoworkspace, 7
-      bind = $mainMod SHIFT, 8, movetoworkspace, 8
-      bind = $mainMod SHIFT, 9, movetoworkspace, 9
-      bind = $mainMod SHIFT, 0, movetoworkspace, 10
+        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        bind = $mainMod SHIFT, 1, movetoworkspace, 1
+        bind = $mainMod SHIFT, 2, movetoworkspace, 2
+        bind = $mainMod SHIFT, 3, movetoworkspace, 3
+        bind = $mainMod SHIFT, 4, movetoworkspace, 4
+        bind = $mainMod SHIFT, 5, movetoworkspace, 5
+        bind = $mainMod SHIFT, 6, movetoworkspace, 6
+        bind = $mainMod SHIFT, 7, movetoworkspace, 7
+        bind = $mainMod SHIFT, 8, movetoworkspace, 8
+        bind = $mainMod SHIFT, 9, movetoworkspace, 9
+        bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-      # resize
-        bind = $mainMod SHIFT CTRL, l, exec, hyprctl dispatch resizeactive 10 0
-        bind = $mainMod SHIFT CTRL, h, exec, hyprctl dispatch resizeactive -10 0
-        bind = $mainMod SHIFT CTRL, k, exec, hyprctl dispatch resizeactive 0 -10
-        bind= $mainMod SHIFT CTRL, j, exec, hyprctl dispatch resizeactive 0 10
+        # resize
+      binde = $mainMod SHIFT CTRL, l, resizeactive, 30 0
+      binde = $mainMod SHIFT CTRL, h, resizeactive, -30 0
+      binde = $mainMod SHIFT CTRL, k, resizeactive, 0 -30
+      binde = $mainMod SHIFT CTRL, j, resizeactive, 0 30
 
-        bind = $mainMod SHIFT, h, exec, hyprctl dispatch movewindow l
-        bind = $mainMod SHIFT, l, exec, hyprctl dispatch movewindow r
-        bind = $mainMod SHIFT, j, exec, hyprctl dispatch movewindow d
-        bind = $mainMod SHIFT, k, exec, hyprctl dispatch movewindow u
+      bind = $mainMod SHIFT, h, exec, hyprctl dispatch movewindow l
+      bind = $mainMod SHIFT, l, exec, hyprctl dispatch movewindow r
+      bind = $mainMod SHIFT, j, exec, hyprctl dispatch movewindow d
+      bind = $mainMod SHIFT, k, exec, hyprctl dispatch movewindow u
 
 
-      # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, mouse_down, workspace, e+1
-      bind = $mainMod, mouse_up, workspace, e-1
+        # Scroll through existing workspaces with mainMod + scroll
+        bind = $mainMod, mouse_down, workspace, e+1
+        bind = $mainMod, mouse_up, workspace, e-1
 
-      # Move/resize windows with mainMod + LMB/RMB and dragging
-      bindm = $mainMod, mouse:272, movewindow
-      bindm = $mainMod, mouse:273, resizewindow
-      bindm = ALT, mouse:272, resizewindow
+        # Move/resize windows with mainMod + LMB/RMB and dragging
+        bindm = $mainMod, mouse:272, movewindow
+        bindm = $mainMod, mouse:273, resizewindow
+        bindm = ALT, mouse:272, resizewindow
     '';
   };
 
