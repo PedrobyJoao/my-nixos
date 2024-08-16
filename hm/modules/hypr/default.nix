@@ -105,6 +105,10 @@
         #     new_is_master = yes
         # }
 
+        misc {
+            new_window_takes_over_fullscreen = 2
+        }
+
         gestures {
             workspace_swipe = false
         }
