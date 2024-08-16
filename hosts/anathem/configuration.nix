@@ -44,6 +44,7 @@
   # bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   # virtualisation
   virtualisation.docker.enable = true;
@@ -56,6 +57,8 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  security.pam.services.hyprlock = { };
 
   environment.sessionVariables = {
     # Electron apps use wayland
