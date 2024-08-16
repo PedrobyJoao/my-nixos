@@ -140,6 +140,11 @@
         };
 
         temperature = {
+          # fixes wrong temperature
+          # see: https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS#%EF%B8%8F-waybar-customizations
+          # get the path with core_temp + temp1_input
+          hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input";
+
           critical-threshold = 80;
           interval = 5;
           format = "{icon} {temperatureC}°C";
