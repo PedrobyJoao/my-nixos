@@ -8,7 +8,7 @@
   imports = [
     ./hyprland-environment.nix
     ./hyprlock.nix
-    ./hypridle.nix
+    # ./hypridle.nix
   ];
 
   home.packages = with pkgs; [
@@ -36,7 +36,7 @@
         exec-once = dunst
 
         source = /home/orolo/.config/hypr/colors
-        # exec = pkill waybar & sleep 0.5 && waybar &
+        exec = pkill waybar & sleep 0.5 && waybar &
         # exec-once = swww init & sleep 0.5 && exec wallpaper_random
         # exec-once = wallpaper_random
 
@@ -121,7 +121,7 @@
 
         bind = $mainMod, M, fullscreen, 1
         bind = $mainMod, RETURN, exec, alacritty
-        bind = $mainMod, D, exec, rofi -show drun -show-icons
+        bind = $mainMod, R, exec, rofi -show drun -show-icons
         bind = $mainMod, B, exec, brave 
         bind = $mainMod, Q, killactive,
         bind = $mainMod SHIFT, Q, exit,
