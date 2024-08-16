@@ -59,6 +59,7 @@
 
     # others
     brave
+    discord
 
     # fun
     neofetch
