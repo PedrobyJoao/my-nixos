@@ -15,6 +15,7 @@
     waybar
     swww
     wlr-randr
+    bibata-cursors
   ];
 
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
@@ -32,7 +33,7 @@
 
         # Autostart
 
-        # exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+        exec-once = hyprctl setcursor Bibata-Modern-Classic 16
         exec-once = dunst
 
         source = /home/orolo/.config/hypr/colors
