@@ -12,6 +12,7 @@
         {
           action = "ToggleViMode";
           key = "Escape";
+          mods = "Alt";
         }
         {
           action = "ToggleViMode";
