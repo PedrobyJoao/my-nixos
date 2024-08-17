@@ -24,7 +24,7 @@
     extraConfig = ''
 
         # Monitor
-        monitor=eDP-1,1920x1200,0x0,1.50
+        monitor=eDP-1,1920x1200,0x0,1.20
 
         # Fix slow startup
         # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -62,7 +62,7 @@
         general {
 
             gaps_in = 5
-            gaps_out = 20
+            gaps_out = 10
             border_size = 2
             col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
             col.inactive_border = rgba(595959aa)
