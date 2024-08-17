@@ -37,6 +37,7 @@
     master.aider-chat
     htop
     tree
+    distrobox
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
@@ -117,6 +118,15 @@
 
   programs.bash = {
     enable = true;
+
+    initExtra = ''
+      # Enable vi editing mode
+      set -o vi
+
+      # Bind C-x C-e to open current command in editor
+      bind '"\C-x\C-e": edit-and-execute-command'
+    '';
+
     shellAliases = {
       hms = "home-manager switch --flake /home/orolo/my-nixos/hm/";
       nixswitch = "sudo nixos-rebuild switch --flake /home/orolo/my-nixos/";
