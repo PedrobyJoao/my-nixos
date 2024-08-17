@@ -141,9 +141,10 @@
 
         temperature = {
           # fixes wrong temperature
-          # see: https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS#%EF%B8%8F-waybar-customizations
+          # see: https://bbs.archlinux.org/viewtopic.php?id=282319 
           # get the path with core_temp + temp1_input
-          hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input";
+          hwmon-path-abs = "/sys/devices/platform/coretemp.0/hwmon";
+          input-filename = "temp1_input";
 
           critical-threshold = 80;
           interval = 5;
