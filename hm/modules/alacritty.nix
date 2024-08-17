@@ -8,6 +8,18 @@
     enable = true;
 
     settings = {
+      keyboard.bindings = [
+        {
+          action = "ToggleViMode";
+          key = "Escape";
+        }
+        {
+          action = "ToggleViMode";
+          key = "I";
+          mode = "Vi";
+        }
+      ];
+
       window = {
         padding = {
           x = 3;
