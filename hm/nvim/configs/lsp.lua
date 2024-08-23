@@ -153,7 +153,15 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         -- go
-        null_ls.builtins.diagnostics.golanci_lint,
+        null_ls.builtins.diagnostics.golangci_lint.with({
+            extra_args = {
+                "--timeout=10m", "--disable-all", "-E=misspell",
+                "-E=govet", "-E=revive", "-E=gofumpt", "-E=gosec", "-E=unparam",
+                "-E=goconst", "-E=prealloc", "-E=stylecheck", "-E=unconvert",
+                "-E=errcheck", "-E=ineffassign", "-E=unused", "-E=tparallel",
+                "-E=whitespace", "-E=staticcheck", "-E=gosimple", "-E=gocritic",
+            }
+        }),
         -- null_ls.builtins.formatting.gofumpt,
         -- null_ls.builtins.formatting.goimports_reviser,
 
