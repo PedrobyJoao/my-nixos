@@ -23,6 +23,7 @@
     '';
 
     plugins = with pkgs.vimPlugins; [
+
       # telescope and requireds
       telescope-nvim
       plenary-nvim
@@ -35,6 +36,13 @@
       nvim-cmp
       none-ls-nvim
       lspkind-nvim
+
+      {
+        plugin = Coqtail;
+        config = builtins.readFile ../nvim/configs/coq.lua;
+        type = "lua";
+      }
+
       {
         plugin = nvim-lspconfig;
         config = builtins.readFile ../nvim/configs/lsp.lua;
