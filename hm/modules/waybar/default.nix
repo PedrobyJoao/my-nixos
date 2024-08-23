@@ -94,7 +94,7 @@
         };
 
         network = {
-          format = "{icon} {essid} ({signalStrength}%)";
+          format = "{icon} {essid}";
           format-icons = {
             "wifi" = [
               "󰤟 "
@@ -110,9 +110,9 @@
             Down: {bandwidthDownBits}'';
 
           interval = 5;
-          format-disconnected = "󰯡 Disconnected";
-          format-ethernet = "󰒢 Connected!";
-          format-wifi = "󰖩 {essid}";
+          # format-disconnected = "󰯡 Disconnected";
+          # format-ethernet = "󰒢 Connected!";
+          # format-wifi = "󰖩 {essid}";
         };
 
         "hyprland/submap" = {
