@@ -3,7 +3,9 @@
 , pkgs
 , ...
 }:
-
+let
+  scripts = import ./scripts.nix { inherit pkgs; };
+in
 {
   imports = [
     ./hyprland-environment.nix
@@ -13,7 +15,6 @@
 
   home.packages = with pkgs; [
     waybar
-    swww
     wlr-randr
     bibata-cursors
   ];
@@ -24,8 +25,12 @@
     systemd.enable = true;
     extraConfig = ''
 
-        # Monitor
+        # Monitors
         monitor=eDP-1,1920x1200,0x0,1.20
+        monitor = HDMI-A-1, 3840x2160, 0x0, 1.3
+
+        # Run the monitor switch script on startup and when triggered
+        exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
 
         # Fix slow startup
         # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -38,8 +43,6 @@
 
         source = /home/orolo/.config/hypr/colors
         exec = pkill waybar & sleep 0.5 && waybar &
-        # exec-once = swww init & sleep 0.5 && exec wallpaper_random
-        # exec-once = wallpaper_random
 
         # Set en layout at startup
 
@@ -143,8 +146,8 @@
 
         # Functional keybinds
         bind =,XF86AudioMicMute,exec,pamixer --default-source -t
-        bind =,XF86MonBrightnessDown,exec,light -U 20
-        bind =,XF86MonBrightnessUp,exec,light -A 20
+        bind = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
+        bind = ,XF86MonBrightnessUp, exec, brightnessctl s +10%
         bind =,XF86AudioMute,exec,pamixer -t
         bind =,XF86AudioLowerVolume,exec,pamixer -d 10
         bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
