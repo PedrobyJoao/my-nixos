@@ -26,8 +26,8 @@ in
     extraConfig = ''
 
         # Monitors
-        monitor=eDP-1,1920x1200,0x0,1.20
-        monitor = HDMI-A-1, 3840x2160, 0x0, 1.3
+        monitor=eDP-1,1920x1200,0x0,1.2
+        monitor = HDMI-A-1,3840x2160,0x0,1.5
 
         # Run the monitor switch script on startup and when triggered
         exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
@@ -141,8 +141,8 @@ in
         # Switch Keyboard Layouts
         # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
 
-        bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
-        bind = SHIFT, Print, exec, grim -g "$(slurp)"
+        # Switch monitor
+        bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
 
         # Functional keybinds
         bind =,XF86AudioMicMute,exec,pamixer --default-source -t

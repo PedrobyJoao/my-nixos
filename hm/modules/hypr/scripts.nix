@@ -1,25 +1,82 @@
 { pkgs }:
 
 {
+
+  # source: https://gist.github.com/miyl/7c4ebc95c5a02f84f36a769a3690cde6 
   monitorSwitch = pkgs.writeScriptBin "monitorSwitch" ''
     #!/usr/bin/env bash
 
-    laptop="eDP-1"
-    monitor="HDMI-A-1"
+    # A hyprland script for a laptop-external-monitor setup, toggling between which is in use
+
+    # Launch at startup to make hyprland disable the internal monitor if an external monitor is detected and enabled
+    # Additionally it's called with a keybind to switch between a laptop monitor and an external display
+    # Ideally the conditional monitor behaviour was instead done directly in hyprland.conf, but I'm not sure whether that's possible
+    #
+    # Relevant info:
+    # - hyprctl monitors: identifies currently enabled monitors
+    # - hyprctl monitors all: identifies ALL connected monitors - including those not in use
+    #
+    # Suggested use:
+    # Add this line somewhere after the regular monitor configuration in hyprland.conf:
+    # exec = /path/to/hyprland-monitors-toggle.sh
+    # Add a keybind to run this script on demand:
+    # bind =,SomeKeyHere, exec, /path/to/hyprland-monitors-toggle.sh
+
+    move_all_workspaces_to_monitor() {
+      TARGET_MONITOR="$1"
+
+      hyprctl workspaces | grep ^workspace | cut --delimiter ' ' --fields 3 | xargs -I '{}' hyprctl dispatch moveworkspacetomonitor '{}' "$TARGET_MONITOR"
 
 
-    # Check if HDMI-A-1 is connected using hyprctl
-    if hyprctl monitors | grep -q "HDMI-A-1"; then
-        # HDMI-A-1 is connected, enable it and disable eDP-1
+      # Previous approach
+      #hyprctl swapactiveworkspaces $EXTERNAL_MONITOR $INTERNAL_MONITOR
+    }
 
-        hyprctl keyword monitor $laptop,disable
-        hyprctl keyword monitor $monitor,preferred,auto,1.5
-        hyprctl dispatch moveworkspacetomonitor monitor,HDMI-A-1 # Move all workspaces to HDMI-A-1
-    else
-        # HDMI-A-1 is not connected, enable eDP-1 and disable HDMI-A-1
-        hyprctl keyword monitor $monitor,disable
-        hyprctl keyword monitor $laptop,preferred,auto,1.2
-        hyprctl dispatch moveworkspacetomonitor monitor,eDP-1 # Move all workspaces to eDP-1
+    # TODO: Detect these instead of hardcoding them
+    INTERNAL_MONITOR="eDP-1"
+    EXTERNAL_MONITOR="HDMI-A-1"
+
+    NUM_MONITORS=$(hyprctl monitors all | grep --count Monitor)
+    NUM_MONITORS_ACTIVE=$(hyprctl monitors | grep --count Monitor)
+
+    # For initial startup if you use hyprland's default monitor settings:
+    # Turn off the laptop monitor if it + another monitor is active
+    if [ "$NUM_MONITORS_ACTIVE" -ge 2 ] && hyprctl monitors | cut --delimiter ' ' --fields 2 | grep --quiet ^$INTERNAL_MONITOR; then
+        # Doing this I hopefully end up on workspace 1 on the external monitor rather than 2 at startup
+        move_all_workspaces_to_monitor $EXTERNAL_MONITOR
+        hyprctl keyword monitor "$INTERNAL_MONITOR, disable"
+
+        pkill waybar & sleep 0.5 
+        waybar &
+
+        # Alternate fix to ensure I start on workspace 1
+        #hyprctl dispatch workspace 1
+        exit
+    fi
+
+    # For dynamically toggling which monitor is active later via a keybind
+    if [ "$NUM_MONITORS" -gt 1 ]; then # Handling multiple monitors
+      if hyprctl monitors | cut --delimiter ' ' --fields 2 | grep --quiet ^$EXTERNAL_MONITOR; then
+        hyprctl keyword monitor $INTERNAL_MONITOR,preferred,0x0,1.2
+        move_all_workspaces_to_monitor $INTERNAL_MONITOR
+        hyprctl keyword monitor "$EXTERNAL_MONITOR, disable"
+
+        pkill waybar & sleep 0.5 
+        waybar &
+      else
+        hyprctl keyword monitor $EXTERNAL_MONITOR,3840x2160,0x0,1.5
+        move_all_workspaces_to_monitor $EXTERNAL_MONITOR
+        hyprctl keyword monitor "$INTERNAL_MONITOR, disable"
+
+        pkill waybar & sleep 0.5 
+        waybar &
+      fi
+    else  # If the external monitor is disconnected without running this script first, it might become the case that no monitor is on - therefore turn on the laptop monitor!
+        hyprctl keyword monitor $INTERNAL_MONITOR,preferred,0x0,1.2
+        move_all_workspaces_to_monitor $INTERNAL_MONITOR
+
+        pkill waybar & sleep 0.5 
+        waybar &
     fi
   '';
 }
