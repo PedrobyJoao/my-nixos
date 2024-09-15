@@ -2,38 +2,16 @@ Standalone Home-Manager for now, I may make it as a module in the future.
 
 TODOs:
 
-- [x] nvim (quite, enough)
-- [x] golang (see details below)
-- [x] aichat
-- [ ] WM and dev environment
-  - [x] minimal hyprland
-  - [x] minimal rofi drun
-  - [x] blueman (accessable by rofi)
-  - [x] slack
-  - [x] sound GUI? pipewire has one?
-  - [x] zoom (try browser version first)
-  - [x] file explorer GUI (nemo)
-  - [x] notification
-  - [x] clipboard not working in every case
-  - [x] network manager GUI (sudo nmtui)
-  - [x] locker
-  - [x] login manager
-  - [x] waybar
-  - [x] fix resolution (tabs of windows (See slack) are too big?)
-  - [ ] suspend when idle
-- [ ] codeium
-- [ ] tmux
+- [ ] codeium (ok, that is important. Should I simply use Copilot?)
+- [ ] screenshot by keybind (see my old config)
+- [ ] suspend when idle
+- [ ] tmux (I'm not missing Tmux tbh)
   - [ ] gruvbox light theme as nvim
   - [ ] vim visual mode
   - [ ] ressurection?
-- [ ] screenshot by keybind (see my old config)
-- [x] brightness control (GUI or cli again?)
-- [x] coq env and necessary tools for Software Foundations
 
 Cool but not urgent:
 
-- [x] incorrect temperature
-- [x] keyboard not connecting (just had to use bluetoothcli)
 - [ ] fix greetd initialization
 - [ ] starship: let me know when within nixshell
 - [ ] (nvim) Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
@@ -135,13 +113,3 @@ Example:
 My entire config is under `hm/nvim/`.
 
 The home-manager config for it is under `hm/modules/nvim.nix`
-
-### Aichat
-
-It has a nixpkg
-
-### Aider
-
-Merged on nixpkgs (master branch): https://github.com/NixOS/nixpkgs/pull/323927
-
-extra: https://discourse.nixos.org/t/50-packaging-bound-aider/49867/4
