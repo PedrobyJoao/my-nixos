@@ -12,25 +12,36 @@ TODOs:
   - [x] slack
   - [x] sound GUI? pipewire has one?
   - [x] zoom (try browser version first)
-  - [ ] network manage GUI
-  - [ ] waybar
-  - [ ] file explorer GUI
-  - [ ] settings GUI (did I ever use this back on popos?)
-  - [ ] random wallpapers
+  - [x] file explorer GUI (nemo)
+  - [x] notification
+  - [x] clipboard not working in every case
+  - [x] network manager GUI (sudo nmtui)
+  - [x] locker
+  - [x] login manager
+  - [x] waybar
+  - [x] fix resolution (tabs of windows (See slack) are too big?)
+  - [ ] suspend when idle
+- [ ] codeium
 - [ ] tmux
   - [ ] gruvbox light theme as nvim
+  - [ ] vim visual mode
   - [ ] ressurection?
 - [ ] screenshot by keybind (see my old config)
-- [ ] brightness control (GUI or cli again?)
-- [ ] codeium
-- [ ] coq env and necessary tools for Software Foundations
-- [ ] aider // WAIT: a nixpkg is being created for it
+- [x] brightness control (GUI or cli again?)
+- [x] coq env and necessary tools for Software Foundations
 
 Cool but not urgent:
 
+- [x] incorrect temperature
+- [x] keyboard not connecting (just had to use bluetoothcli)
+- [ ] fix greetd initialization
+- [ ] starship: let me know when within nixshell
+- [ ] (nvim) Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
 - [ ] random wallpapers
+- [ ] (nvim) carl sagan message when open
 - [ ] hibernate
-- [ ] hyprland start one terminal
+- [ ] fuzzy finder to be used to find files within $HOME
+- [ ] sound control through CLI (e.g.: alsaMixer)
 
 ## Dev
 
@@ -41,24 +52,79 @@ Cool but not urgent:
 
 ### Go
 
-Tip: build specific shell for each project
+Tip: for each project, create a minimal flake.nix with `mkShell`.
 
-Adding the following `shell.nix` in my `go` project was enough to run something with: `sqlite`, `libp2p` and other libraries...
+And use `nix develop` to enter the shell.
+
+Example:
 
 ```nix
-{ pkgs ? import <nixpkgs> {} }:
+{
+  description = "NuNet Device Management Service";
 
-pkgs.mkShell {
-  buildInputs = with pkgs; [
-    go
-    gcc
-    pkg-config
-    sqlite
-  ];
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
 
-  shellHook = ''
-    export CGO_ENABLED=1
-  '';
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    ,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ ];
+        };
+      in
+      {
+        packages = rec {
+          device-management-service = pkgs.buildGoModule {
+            pname = "device-management-service";
+            src = ./.;
+            vendorHash = null; # Let nix compute the vendor hash
+            # If you have a vendor directory, use this instead:
+            # vendorHash = pkgs.lib.fakeSha256;
+
+            buildInputs = with pkgs; [
+              pkg-config
+              sqlite
+            ];
+
+            # Add any necessary build flags here
+            buildFlags = [ "-tags=libsqlite3" ];
+
+            meta = {
+              description = "NuNet Device Management Service";
+              homepage = "https://gitlab.com/nunet/device-management-service";
+              # license = licenses.<something>;
+            };
+          };
+          default = device-management-service;
+        };
+
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            go_1_21
+            gopls
+            gotools
+            go-tools
+            sqlite
+            pkg-config
+            systemd.dev
+          ];
+
+          shellHook = ''
+            export CGO_ENABLED=1
+            export PKG_CONFIG_PATH="${pkgs.systemd.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+          '';
+        };
+      }
+    );
 }
 ```
 
@@ -66,11 +132,9 @@ pkgs.mkShell {
 
 ### Nvim
 
-TODOs:
+My entire config is under `hm/nvim/`.
 
-- [ ] Codeium
-- [ ] copy and paste between terminals
-- [ ] Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
+The home-manager config for it is under `hm/modules/nvim.nix`
 
 ### Aichat
 
@@ -78,12 +142,6 @@ It has a nixpkg
 
 ### Aider
 
-I'll wait for the people building the nixpkg which is ocurring now.
+Merged on nixpkgs (master branch): https://github.com/NixOS/nixpkgs/pull/323927
 
-Possibility: instantiate Aider within a dev shell together with project's nix shell if any.
-
-- important: https://discourse.nixos.org/t/50-packaging-bound-aider/49867/4
-- https://src.thehellings.com/greg/aider-flake
-- https://github.com/jbotwell/nixaider
-- https://github.com/cognivore/flake-aider-chat/blob/main/flake.nix
-- https://github.com/paul-gauthier/aider/pull/608
+extra: https://discourse.nixos.org/t/50-packaging-bound-aider/49867/4
