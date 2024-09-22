@@ -15,6 +15,7 @@ in
 
   home.packages = with pkgs; [
     waybar
+    hyprshot
     wlr-randr
     bibata-cursors
   ];
@@ -143,6 +144,9 @@ in
 
         # Switch monitor
         bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
+
+        # Screenshot a region
+        bind = $mainMod SHIFT, P, exec, hyprshot -m region --clipboard-only
 
         # Functional keybinds
         bind =,XF86AudioMicMute,exec,pamixer --default-source -t
