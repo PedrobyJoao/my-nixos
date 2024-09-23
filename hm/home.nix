@@ -43,10 +43,12 @@
     # desktop env tools
     rofi-wayland
     wl-clipboard
+    xdg-utils
     dunst
     nemo
     swaylock
     unzip
+    fzf
 
     # net, bluetooth, sounds... 
     networkmanagerapplet
@@ -118,6 +120,8 @@
 
       # Bind C-x C-e to open current command in editor
       bind '"\C-x\C-e": edit-and-execute-command'
+
+      eval "$(fzf --bash)"
     '';
 
     shellAliases = {
@@ -132,8 +136,9 @@
       l = "ls -CF";
       tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
       aider = "aider --no-auto-commits -c ~/.config/aider/config.yaml";
-      dmscd = "cd ~/lab/nunet/device-management-service";
+      nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
+      grm = "go run main.go";
     };
   };
 
