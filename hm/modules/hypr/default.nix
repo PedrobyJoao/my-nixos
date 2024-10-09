@@ -27,8 +27,8 @@ in
     extraConfig = ''
 
         # Monitors
-        monitor=eDP-1,1920x1200,0x0,1.2
-        monitor = HDMI-A-1,3840x2160,0x0,1.5
+        monitor=eDP-1,1920x1200,0x0,1.2,bitdepth,10
+        monitor = HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
 
         # Run the monitor switch script on startup and when triggered
         exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
@@ -140,7 +140,7 @@ in
         bindl=,switch:Lid Switch, exec, hyprlock
 
         # Switch Keyboard Layouts
-        # bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
+        bind = $mainMod, SPACE, exec, hyprctl switchxkblayout keyboard-k380-keyboard next
 
         # Switch monitor
         bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
