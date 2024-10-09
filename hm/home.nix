@@ -33,6 +33,7 @@
     # dev-tools
     aichat
     master.aider-chat
+    portaudio # for aider voice assistant
     htop
     tree
 
@@ -122,6 +123,8 @@
       bind '"\C-x\C-e": edit-and-execute-command'
 
       eval "$(fzf --bash)"
+
+      export NUNET="/home/orolo/lab/nunet"
     '';
 
     shellAliases = {
