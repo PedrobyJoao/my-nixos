@@ -36,6 +36,7 @@
     portaudio # for aider voice assistant
     htop
     tree
+    act # github workflow local test
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
@@ -142,6 +143,8 @@
       nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
       grm = "go run main.go";
+      ais = "aichat --code";
+      ai = "aichat --role simple";
     };
   };
 
