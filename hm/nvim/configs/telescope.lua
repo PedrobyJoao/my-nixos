@@ -1,19 +1,20 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 
-require('telescope').setup{
+require('telescope').setup {
     defaults = {
         mappings = {
             n = {
-				["<leader>q"] = actions.close,
+                ["<leader>q"] = actions.close,
             },
             i = {
-				["<ESC>"] = actions.close,
+                ["<ESC>"] = actions.close,
+                ["<Tab>"] = actions.delete_buffer,
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-j>"] = actions.move_selection_next,
             },
         },
-        layout_config = { 
+        layout_config = {
             height = 0.99,
             width = 0.99,
             mirror = true,
@@ -41,13 +42,13 @@ map('n', '<leader>gs', builtin.git_status, {})
 map('n', '<leader>gst', builtin.git_stash, {})
 map('n', '<leader>gc', builtin.git_commits, {})
 
-map('n', '<leader>ps', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
-
 map('n',
-    '<leader>p',
-    ':lua require"telescope.builtin".find_files({ prompt_title = "< Custom Search >", cwd = "~/path/to/your/folder" })<CR>'
+    '<leader>fgd',
+    ":lua require('telescope.builtin').live_grep({ search_dirs = { vim.fn.input('Directory: ') } })<CR>"
 )
+
+map('n', '<leader>ps', function()
+    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+end)
 
 -- helpful note: `:Telescope keymaps` to see keymaps being used
