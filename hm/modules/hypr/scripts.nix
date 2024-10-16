@@ -64,7 +64,7 @@
         pkill waybar & sleep 0.5 
         waybar &
       else
-        hyprctl keyword monitor $EXTERNAL_MONITOR,3840x2160,0x0,1.5
+        hyprctl keyword monitor $EXTERNAL_MONITOR,3840x2160,0x0,1.5,bitdepth,10
         move_all_workspaces_to_monitor $EXTERNAL_MONITOR
         hyprctl keyword monitor "$INTERNAL_MONITOR, disable"
 
