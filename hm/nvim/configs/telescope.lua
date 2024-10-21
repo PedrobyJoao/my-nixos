@@ -31,6 +31,7 @@ end
 map('n', '<leader>gi', builtin.lsp_implementations, {})
 
 map('n', '<leader>ff', builtin.find_files, {})
+map('n', '<leader>ffd', builtin.find_files, {})
 map('n', '<leader>gf', builtin.git_files, {})
 map('n', '<leader>fg', builtin.live_grep, {})
 map('n', '<leader>fb', builtin.buffers, {})
