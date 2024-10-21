@@ -83,6 +83,7 @@
         plugin = (
           nvim-treesitter.withPlugins (p: [
             p.tree-sitter-nix
+            p.tree-sitter-elm
             p.tree-sitter-go
             p.tree-sitter-rust
             p.tree-sitter-vim
@@ -130,6 +131,10 @@
       lua-language-server
       # stylua
       # lua54Packages.luacheck
+
+      # elm
+      elmPackages.elm-language-server
+      elmPackages.elm-format
 
       # Shell scripting
       shellcheck

@@ -99,6 +99,9 @@ lsp.lua_ls.setup({
 -- Python
 default_lsp_setup("pyright")
 
+-- Elm
+default_lsp_setup("elmls")
+
 -- Typescript
 -- nvim_lsp.tsserver.setup({
 -- 	init_options = require("nvim-lsp-ts-utils").init_options,
@@ -170,6 +173,9 @@ null_ls.setup({
         -- null_ls.builtins.formatting.nixpkgs_fmt,
         null_ls.builtins.diagnostics.statix,
         null_ls.builtins.code_actions.statix,
+
+        -- Elm
+        null_ls.builtins.formatting.elm_format
     },
 })
 
