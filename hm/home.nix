@@ -143,8 +143,8 @@
       nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
       grm = "go run main.go";
-      ais = "aichat --code";
-      ai = "aichat --role simple";
+      ais = "aichat -s temp --code";
+      ai = "aichat -s temp --role simple";
     };
   };
 
