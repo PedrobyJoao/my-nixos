@@ -5,11 +5,6 @@ local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
-    local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
-    end
-
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     local opts = { noremap = true, silent = true }
@@ -173,9 +168,6 @@ null_ls.setup({
         -- null_ls.builtins.formatting.nixpkgs_fmt,
         null_ls.builtins.diagnostics.statix,
         null_ls.builtins.code_actions.statix,
-
-        -- Elm
-        null_ls.builtins.formatting.elm_format
     },
 })
 
@@ -247,9 +239,10 @@ cmp.setup {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
-        { name = 'codeium' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        -- TODO: bruh...
+        { name = '/nix/store/pxv2q7w0vrzckkj4789fx9xf1rcl1n9g-codeium-1.10.0/bin/codeium_language_server' },
     }, {
         { name = 'buffer' }
     }),

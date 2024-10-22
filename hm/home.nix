@@ -140,6 +140,7 @@
       l = "ls -CF";
       tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
       aider = "aider --no-auto-commits -c ~/.config/aider/config.yaml";
+      restoreaider = "aider --restore-chat-history";
       nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
       grm = "go run main.go";

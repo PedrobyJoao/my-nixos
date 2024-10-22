@@ -104,7 +104,7 @@
       }
 
       {
-        plugin = codeium-nvim;
+        plugin = codeium-vim;
         config = ''
           vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true })
           vim.keymap.set('i', '<C-e>', function() return vim.fn['codeium#Clear']() end, { expr = true })
@@ -134,7 +134,6 @@
 
       # elm
       elmPackages.elm-language-server
-      elmPackages.elm-format
 
       # Shell scripting
       shellcheck
@@ -149,6 +148,9 @@
 
       # Telescope tools
       ripgrep
+
+      # lsps
+      codeium
     ];
   };
 }

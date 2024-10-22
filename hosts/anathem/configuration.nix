@@ -82,7 +82,6 @@
   time.timeZone = "America/Sao_Paulo";
 
   # sound
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -158,6 +157,11 @@
     PermitRootLogin = "no";
     KbdInteractiveAuthentication = false;
   };
+
+  # fix for Codeium somehow
+  systemd.tmpfiles.rules = [
+    "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.glibc}/lib64/ld-linux-x86-64.so.2"
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
