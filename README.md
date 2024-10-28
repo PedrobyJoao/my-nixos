@@ -2,8 +2,8 @@ Standalone Home-Manager for now, I may make it as a module in the future.
 
 Important TODOs:
 
+- [ ] update nixos and hm flakes (Getting some errors now)
 - [ ] Home-manager user for non-linux distros
-- [ ] fix codeium
 
 TODOs:
 
