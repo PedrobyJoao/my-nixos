@@ -241,8 +241,7 @@ cmp.setup {
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        -- TODO: bruh...
-        { name = '/nix/store/pxv2q7w0vrzckkj4789fx9xf1rcl1n9g-codeium-1.10.0/bin/codeium_language_server' },
+        { name = vim.g.codeium },
     }, {
         { name = 'buffer' }
     }),

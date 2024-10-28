@@ -15,6 +15,7 @@
     # for some reasons some configs are not being loaded from plugins `config`
     # files, so I'll just write the lua code below.
     extraLuaConfig = ''
+      vim.g.codeium = "${pkgs.codeium}/bin/codeium"
       vim.g.mapleader = ' '
       ${builtins.readFile ../nvim/keybinds.lua}
       ${builtins.readFile ../nvim/settings.lua}
