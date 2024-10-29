@@ -48,7 +48,6 @@
     xdg-utils
     dunst
     nemo
-    swaylock
     unzip
     fzf
 
