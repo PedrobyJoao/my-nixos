@@ -1,9 +1,16 @@
+### Home Manager
+
 Standalone Home-Manager for now, I may make it as a module in the future.
+
+Also, since I'm using standalone HM, I noticed that when updating my flakes, I should update both flakes
+of my NixOS config and the flake of my home-manager. Otherwise, updating just one of them might result in errors.
+
+### TODOs
 
 Important TODOs:
 
-- [ ] update nixos and hm flakes (Getting some errors now)
 - [ ] Home-manager user for non-linux distros
+- [ ] easy sandbox to test anything
 
 TODOs:
 
