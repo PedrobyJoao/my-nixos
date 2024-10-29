@@ -1,4 +1,4 @@
 {
-    gitUsername = "PedroByJoao";
-    gitEmail = "joaobk09@gmail.com";
+  gitUsername = "PedroByJoao";
+  gitEmail = "joaoexplorer235@gmail.com";
 }
