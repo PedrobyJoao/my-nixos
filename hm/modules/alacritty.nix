@@ -14,11 +14,6 @@
           key = "Escape";
           mods = "Alt";
         }
-        {
-          action = "ToggleViMode";
-          key = "I";
-          mode = "Vi";
-        }
       ];
 
       window = {
