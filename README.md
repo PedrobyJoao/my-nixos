@@ -18,6 +18,8 @@ TODOs:
 - [ ] tmux (I'm not missing Tmux tbh)
   - [ ] vim visual mode
   - [ ] ressurection?
+- [ ] assets as submodule
+- [ ] nvim as submodule
 
 Cool but not urgent:
 
