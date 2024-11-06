@@ -55,6 +55,7 @@
     networkmanagerapplet
     pavucontrol
     brightnessctl
+    pulsemixer
 
     # work tools
     google-chrome
@@ -145,6 +146,7 @@
       grm = "go run main.go";
       ais = "aichat -s temp --code";
       ai = "aichat -s temp --role simple";
+      pm = "pulsemixer";
     };
   };
 
