@@ -20,6 +20,12 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--keep-generations 3 --delete-older-than 30d";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
