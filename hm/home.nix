@@ -147,6 +147,7 @@
       ais = "aichat -s temp --code";
       ai = "aichat -s temp --role simple";
       pm = "pulsemixer";
+      kcc = "nix run github:NixOS/nixpkgs/3eaeaeb6b1e08a016380c279f8846e0bd8808916#kcc";
     };
   };
 
