@@ -37,6 +37,7 @@
     htop
     tree
     act # github workflow local test
+    git-lfs
 
     # fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
