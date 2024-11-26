@@ -46,6 +46,11 @@
   networking = {
     networkmanager.enable = true;
     hostName = "anathem";
+    extraHosts = ''
+      127.0.0.1 www.youtube.com
+      127.0.0.1 reddit.com
+      127.0.0.1 www.reddit.com
+    '';
   };
 
   # bluetooth
