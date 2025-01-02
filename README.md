@@ -9,7 +9,10 @@ of my NixOS config and the flake of my home-manager. Otherwise, updating just on
 
 Important TODOs:
 
+- [ ] fix screen sharing
 - [ ] Home-manager user for non-linux distros
+- [ ] make screen changing more smooth
+- [ ] get an Oracle always free machine
 - [ ] easy sandbox to test anything
 
 TODOs:
