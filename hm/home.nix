@@ -40,8 +40,8 @@
     git-lfs
 
     # fonts
-    (nerdfonts.override { fonts = [ "Hack" ]; })
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
 
     # desktop env tools
     rofi-wayland
@@ -52,7 +52,7 @@
     unzip
     fzf
 
-    # net, bluetooth, sounds... 
+    # net, bluetooth, sounds...
     networkmanagerapplet
     pavucontrol
     brightnessctl
