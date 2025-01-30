@@ -53,6 +53,7 @@
     fzf
 
     # net, bluetooth, sounds...
+    rsync
     networkmanagerapplet
     pavucontrol
     brightnessctl
