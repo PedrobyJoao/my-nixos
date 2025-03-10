@@ -26,192 +26,196 @@ in
     systemd.enable = true;
     extraConfig = ''
 
-        # Monitors
-        monitor=eDP-1,1920x1200,0x0,1.2,bitdepth,10
-        monitor = HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
+          # Monitors
+          monitor=eDP-1,1920x1200,0x0,1.2,bitdepth,10
+          monitor = HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
 
-        # Run the monitor switch script on startup and when triggered
-        exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
+          # Run the monitor switch script on startup and when triggered
+          exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
 
-        # Fix slow startup
-        # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+          # Fix slow startup
+          exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-        # Autostart
+          # Fix screen sharing
+          exec-once = dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+      env = XDG_CURRENT_DESKTOP,Hyprland
 
-        exec-once = hyprctl setcursor Bibata-Modern-Classic 16
-        exec-once = dunst
+          # Autostart
 
-        source = /home/orolo/.config/hypr/colors
-        exec = pkill waybar & sleep 0.5 && waybar &
+          exec-once = hyprctl setcursor Bibata-Modern-Classic 16
+          exec-once = dunst
 
-        # Set en layout at startup
+          source = /home/orolo/.config/hypr/colors
+          exec = pkill waybar & sleep 0.5 && waybar &
 
-        # Input config
-        input {
-            kb_layout = us, br
-            kb_variant =
-            kb_model =
-            kb_options =
-            kb_rules =
+          # Set en layout at startup
 
-            follow_mouse = 0
+          # Input config
+          input {
+              kb_layout = us, br
+              kb_variant =
+              kb_model =
+              kb_options =
+              kb_rules =
 
-            touchpad {
-                natural_scroll = false
-            }
+              follow_mouse = 0
 
-            sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-        }
+              touchpad {
+                  natural_scroll = false
+              }
 
-        general {
+              sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+          }
 
-            gaps_in = 5
-            gaps_out = 10
-            border_size = 2
-            col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-            col.inactive_border = rgba(595959aa)
+          general {
 
-            layout = dwindle
-        }
+              gaps_in = 5
+              gaps_out = 10
+              border_size = 2
+              col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+              col.inactive_border = rgba(595959aa)
 
-        # decoration {
+              layout = dwindle
+          }
 
-        #     rounding = 10
-        #     blur = true
-        #     blur_size = 3
-        #     blur_passes = 1
-        #     blur_new_optimizations = true
+          # decoration {
 
-        #     drop_shadow = true
-        #     shadow_range = 4
-        #     shadow_render_power = 3
-        #     col.shadow = rgba(1a1a1aee)
-        # }
+          #     rounding = 10
+          #     blur = true
+          #     blur_size = 3
+          #     blur_passes = 1
+          #     blur_new_optimizations = true
 
-        animations {
-            enabled = yes
+          #     drop_shadow = true
+          #     shadow_range = 4
+          #     shadow_render_power = 3
+          #     col.shadow = rgba(1a1a1aee)
+          # }
 
-            bezier = ease,0.4,0.02,0.21,1
+          animations {
+              enabled = yes
 
-            animation = windows, 1, 3.5, ease, slide
-            animation = windowsOut, 1, 3.5, ease, slide
-            animation = border, 1, 6, default
-            animation = fade, 1, 3, ease
-            animation = workspaces, 1, 3.5, ease
-        }
+              bezier = ease,0.4,0.02,0.21,1
 
-        dwindle {
-            pseudotile = yes
-            preserve_split = yes
-        }
+              animation = windows, 1, 3.5, ease, slide
+              animation = windowsOut, 1, 3.5, ease, slide
+              animation = border, 1, 6, default
+              animation = fade, 1, 3, ease
+              animation = workspaces, 1, 3.5, ease
+          }
 
-        # master {
-        #     new_is_master = yes
-        # }
+          dwindle {
+              pseudotile = yes
+              preserve_split = yes
+          }
 
-        misc {
-            new_window_takes_over_fullscreen = 2
-        }
+          # master {
+          #     new_is_master = yes
+          # }
 
-        gestures {
-            workspace_swipe = false
-        }
+          misc {
+              new_window_takes_over_fullscreen = 2
+          }
 
-        windowrule=center,^(rofi)$
-        windowrule=float,^(rofi)$
-        windowrule=float,^(blueman-manager)$
+          gestures {
+              workspace_swipe = false
+          }
 
-        $mainMod = SUPER
+          windowrule=center,^(rofi)$
+          windowrule=float,^(rofi)$
+          windowrule=float,^(blueman-manager)$
 
-        bind = $mainMod, M, fullscreen, 1
-        bind = $mainMod, RETURN, exec, alacritty
-        bind = $mainMod, R, exec, rofi -show drun -show-icons
-        bind = $mainMod, B, exec, brave 
-        bind = $mainMod, Q, killactive,
-        bind = $mainMod SHIFT, Q, exit,
-        bind = $mainMod, F, exec, nautilus
-        bind = $mainMod, V, togglefloating,
-        bind = $mainMod, P, pseudo, # dwindle
-        # bind = $mainMod, J, togglesplit, # dwindle
+          $mainMod = SUPER
 
-        # hyprlock
-        bind = $mainMod, C, exec, hyprlock
-        bindl=,switch:Lid Switch, exec, hyprlock
+          bind = $mainMod, M, fullscreen, 1
+          bind = $mainMod, RETURN, exec, alacritty
+          bind = $mainMod, A, exec, alacritty -e bash -i -c "ai"
+          bind = $mainMod, R, exec, rofi -show drun -show-icons
+          bind = $mainMod, Q, killactive,
+          bind = $mainMod SHIFT, Q, exit,
+          bind = $mainMod, F, exec, nautilus
+          bind = $mainMod, V, togglefloating,
+          bind = $mainMod, P, pseudo, # dwindle
+          # bind = $mainMod, J, togglesplit, # dwindle
 
-        # Switch Keyboard Layouts
-        bind = $mainMod, SPACE, exec, hyprctl switchxkblayout keyboard-k380-keyboard next
+          # hyprlock
+          bind = $mainMod, C, exec, hyprlock
+          bindl=,switch:Lid Switch, exec, hyprlock
 
-        # Switch monitor
-        bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
+          # Switch Keyboard Layouts
+          bind = $mainMod, o, exec, hyprctl switchxkblayout keyboard-k380-keyboard next
 
-        # Screenshot a region
-        bind = $mainMod SHIFT, P, exec, hyprshot -m region --clipboard-only
+          # Switch monitor
+          bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
 
-        # Functional keybinds
-        bind =,XF86AudioMicMute,exec,pamixer --default-source -t
-        bind = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
-        bind = ,XF86MonBrightnessUp, exec, brightnessctl s +10%
-        bind =,XF86AudioMute,exec,pamixer -t
-        bind =,XF86AudioLowerVolume,exec,pamixer -d 10
-        bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
-        bind =,XF86AudioPlay,exec,playerctl play-pause
-        bind =,XF86AudioPause,exec,playerctl play-pause
+          # Screenshot a region
+          bind = $mainMod SHIFT, P, exec, hyprshot -m region --clipboard-only
+          bind = $mainMod CTRL SHIFT, P, exec, hyprshot -m region -o /home/orolo/prints
 
-        # to switch between windows in a floating workspace
-        bind = SUPER,Tab,cyclenext,
-        bind = SUPER,Tab,bringactivetotop,
+          # Functional keybinds
+          bind =,XF86AudioMicMute,exec,pamixer --default-source -t
+          bind = ,XF86MonBrightnessDown, exec, brightnessctl s 10%-
+          bind = ,XF86MonBrightnessUp, exec, brightnessctl s +10%
+          bind =,XF86AudioMute,exec,pamixer -t
+          bind =,XF86AudioLowerVolume,exec,pamixer -d 10
+          bind =,XF86AudioRaiseVolume,exec,pamixer -i 10
+          bind =,XF86AudioPlay,exec,playerctl play-pause
+          bind =,XF86AudioPause,exec,playerctl play-pause
 
-        # Move focus with mainMod + arrow keys
-        bind = $mainMod, h, movefocus, l
-        bind = $mainMod, l, movefocus, r
-        bind = $mainMod, k, movefocus, u
-        bind = $mainMod, j, movefocus, d
+          # to switch between windows in a floating workspace
+          bind = SUPER,Tab,cyclenext,
+          bind = SUPER,Tab,bringactivetotop,
 
-        # Switch workspaces with mainMod + [0-9]
-        bind = $mainMod, 1, workspace, 1
-        bind = $mainMod, 2, workspace, 2
-        bind = $mainMod, 3, workspace, 3
-        bind = $mainMod, 4, workspace, 4
-        bind = $mainMod, 5, workspace, 5
-        bind = $mainMod, 6, workspace, 6
-        bind = $mainMod, 7, workspace, 7
-        bind = $mainMod, 8, workspace, 8
-        bind = $mainMod, 9, workspace, 9
-        bind = $mainMod, 0, workspace, 10
+          # Move focus with mainMod + arrow keys
+          bind = $mainMod, h, movefocus, l
+          bind = $mainMod, l, movefocus, r
+          bind = $mainMod, k, movefocus, u
+          bind = $mainMod, j, movefocus, d
 
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        bind = $mainMod SHIFT, 1, movetoworkspace, 1
-        bind = $mainMod SHIFT, 2, movetoworkspace, 2
-        bind = $mainMod SHIFT, 3, movetoworkspace, 3
-        bind = $mainMod SHIFT, 4, movetoworkspace, 4
-        bind = $mainMod SHIFT, 5, movetoworkspace, 5
-        bind = $mainMod SHIFT, 6, movetoworkspace, 6
-        bind = $mainMod SHIFT, 7, movetoworkspace, 7
-        bind = $mainMod SHIFT, 8, movetoworkspace, 8
-        bind = $mainMod SHIFT, 9, movetoworkspace, 9
-        bind = $mainMod SHIFT, 0, movetoworkspace, 10
+          # Switch workspaces with mainMod + [0-9]
+          bind = $mainMod, 1, workspace, 1
+          bind = $mainMod, 2, workspace, 2
+          bind = $mainMod, 3, workspace, 3
+          bind = $mainMod, 4, workspace, 4
+          bind = $mainMod, 5, workspace, 5
+          bind = $mainMod, 6, workspace, 6
+          bind = $mainMod, 7, workspace, 7
+          bind = $mainMod, 8, workspace, 8
+          bind = $mainMod, 9, workspace, 9
+          bind = $mainMod, 0, workspace, 10
 
-        # resize
-      binde = $mainMod SHIFT CTRL, l, resizeactive, 30 0
-      binde = $mainMod SHIFT CTRL, h, resizeactive, -30 0
-      binde = $mainMod SHIFT CTRL, k, resizeactive, 0 -30
-      binde = $mainMod SHIFT CTRL, j, resizeactive, 0 30
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          bind = $mainMod SHIFT, 1, movetoworkspace, 1
+          bind = $mainMod SHIFT, 2, movetoworkspace, 2
+          bind = $mainMod SHIFT, 3, movetoworkspace, 3
+          bind = $mainMod SHIFT, 4, movetoworkspace, 4
+          bind = $mainMod SHIFT, 5, movetoworkspace, 5
+          bind = $mainMod SHIFT, 6, movetoworkspace, 6
+          bind = $mainMod SHIFT, 7, movetoworkspace, 7
+          bind = $mainMod SHIFT, 8, movetoworkspace, 8
+          bind = $mainMod SHIFT, 9, movetoworkspace, 9
+          bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-      bind = $mainMod SHIFT, h, exec, hyprctl dispatch movewindow l
-      bind = $mainMod SHIFT, l, exec, hyprctl dispatch movewindow r
-      bind = $mainMod SHIFT, j, exec, hyprctl dispatch movewindow d
-      bind = $mainMod SHIFT, k, exec, hyprctl dispatch movewindow u
+          # resize
+        binde = $mainMod SHIFT CTRL, l, resizeactive, 30 0
+        binde = $mainMod SHIFT CTRL, h, resizeactive, -30 0
+        binde = $mainMod SHIFT CTRL, k, resizeactive, 0 -30
+        binde = $mainMod SHIFT CTRL, j, resizeactive, 0 30
+
+        bind = $mainMod SHIFT, h, exec, hyprctl dispatch movewindow l
+        bind = $mainMod SHIFT, l, exec, hyprctl dispatch movewindow r
+        bind = $mainMod SHIFT, j, exec, hyprctl dispatch movewindow d
+        bind = $mainMod SHIFT, k, exec, hyprctl dispatch movewindow u
 
 
-        # Scroll through existing workspaces with mainMod + scroll
-        bind = $mainMod, mouse_down, workspace, e+1
-        bind = $mainMod, mouse_up, workspace, e-1
+          # Scroll through existing workspaces with mainMod + scroll
+          bind = $mainMod, mouse_down, workspace, e+1
+          bind = $mainMod, mouse_up, workspace, e-1
 
-        # Move/resize windows with mainMod + LMB/RMB and dragging
-        bindm = $mainMod, mouse:272, movewindow
-        bindm = $mainMod, mouse:273, resizewindow
-        bindm = ALT, mouse:272, resizewindow
+          # Move/resize windows with mainMod + LMB/RMB and dragging
+          bindm = $mainMod, mouse:272, movewindow
+          bindm = $mainMod, mouse:273, resizewindow
+          bindm = ALT, mouse:272, resizewindow
     '';
   };
 
