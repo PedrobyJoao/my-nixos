@@ -28,9 +28,10 @@ in
 
           # Monitors
           monitor=eDP-1,1920x1200,0x0,1.2,bitdepth,10
-          monitor = HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
+          monitor=HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
 
           # Run the monitor switch script on startup and when triggered
+          # exec = pkill waybar & sleep 0.5 && waybar &
           exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
 
           # Fix slow startup
@@ -46,13 +47,12 @@ in
           exec-once = dunst
 
           source = /home/orolo/.config/hypr/colors
-          exec = pkill waybar & sleep 0.5 && waybar &
 
           # Set en layout at startup
 
           # Input config
           input {
-              kb_layout = us, br
+              kb_layout = us,br
               kb_variant =
               kb_model =
               kb_options =
