@@ -130,18 +130,19 @@
           format = "{icon}";
           all-outputs = true;
           format-icons = {
-            "1" = "";
-            "2" = "web";
-            "3" = "work";
+            "1" = "一";
+            "2" = "二";
+            "3" = "三";
             "4" = "四";
             "5" = "五";
             "6" = "六";
+            "7" = "七";
           };
         };
 
         temperature = {
           # fixes wrong temperature
-          # see: https://bbs.archlinux.org/viewtopic.php?id=282319 
+          # see: https://bbs.archlinux.org/viewtopic.php?id=282319
           # get the path with core_temp + temp1_input
           hwmon-path-abs = "/sys/devices/platform/coretemp.0/hwmon";
           input-filename = "temp1_input";
