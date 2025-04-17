@@ -33,7 +33,6 @@
     # dev-tools
     aichat
     master.aider-chat
-    portaudio # for aider voice assistant
     htop
     tree
     act # github workflow local test
@@ -58,6 +57,7 @@
     pavucontrol
     brightnessctl
     pulsemixer
+    portaudio # for aider voice assistant
 
     # work tools
     google-chrome
