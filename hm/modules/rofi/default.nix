@@ -13,7 +13,7 @@
       show-icons: true;
       drun-display-format: "{name}";
       font: "JetBrainsMono Nerd Font Medium 12";
-      modi: "window,run,drun";
+      modi: "window,run,drun,recursivebrowser";
       kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
       kb-row-down: "Down,Control+j";
       kb-accept-entry: "Control+m,Return,KP_Enter";

@@ -121,9 +121,9 @@ in
               workspace_swipe = false
           }
 
-          windowrule=center,^(rofi)$
-          windowrule=float,^(rofi)$
-          windowrule=float,^(blueman-manager)$
+          windowrule=center,class:rofi,title:rofi
+          windowrule=float,class:rofi,title:rofi
+          windowrule=float,class:blueman-manager,title:blueman-manager
 
           $mainMod = SUPER
 
@@ -131,6 +131,7 @@ in
           bind = $mainMod, RETURN, exec, alacritty
           bind = $mainMod, A, exec, alacritty -e bash -i -c "ai"
           bind = $mainMod, R, exec, rofi -show drun -show-icons
+          bind = $mainMod, F, exec, rofi -show recursivebrowser
           bind = $mainMod, Q, killactive,
           bind = $mainMod SHIFT, Q, exit,
           bind = $mainMod, F, exec, nautilus
@@ -183,6 +184,7 @@ in
           bind = $mainMod, 8, workspace, 8
           bind = $mainMod, 9, workspace, 9
           bind = $mainMod, 0, workspace, 10
+
 
           # Move active window to a workspace with mainMod + SHIFT + [0-9]
           bind = $mainMod SHIFT, 1, movetoworkspace, 1
