@@ -2,9 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config
-, lib
-, pkgs
+{ pkgs
 , ...
 }:
 
@@ -24,7 +22,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--keep-generations 3 --delete-older-than 30d";
+      options = "--delete-older-than 30d";
     };
   };
 
