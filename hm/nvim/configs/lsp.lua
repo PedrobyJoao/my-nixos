@@ -56,6 +56,9 @@ lsp.nil_ls.setup({
 -- Go
 default_lsp_setup("gopls")
 
+-- Haskell
+default_lsp_setup("hls")
+
 -- Lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
@@ -91,8 +94,67 @@ lsp.lua_ls.setup({
     capabilities = capabilities,
 })
 
--- Python
-default_lsp_setup("pyright")
+local function set_python_path(opts)
+    local path = opts.args
+    local clients = vim.lsp.get_clients {
+        bufnr = vim.api.nvim_get_current_buf(),
+        name = 'pyright',
+    }
+    for _, client in ipairs(clients) do
+        if client.settings then
+            client.settings.python = vim.tbl_deep_extend('force', client.settings.python, { pythonPath = path })
+        else
+            client.config.settings = vim.tbl_deep_extend('force', client.config.settings,
+                { python = { pythonPath = path } })
+        end
+        client.notify('workspace/didChangeConfiguration', { settings = nil })
+    end
+end
+
+lsp.pyright.setup({
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    root_markers = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+        '.git',
+    },
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                -- diagnosticMode = 'openFilesOnly',
+            },
+        },
+    },
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
+            client:exec_cmd({
+                command = 'pyright.organizeimports',
+                arguments = { vim.uri_from_bufnr(bufnr) },
+            })
+        end, {
+            desc = 'Organize Imports',
+        })
+        vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightSetPythonPath', set_python_path, {
+            desc = 'Reconfigure pyright with the provided python path',
+            nargs = 1,
+            complete = 'file',
+        })
+    end,
+    capabilities = capabilities,
+})
+
+
+-- Nim
+default_lsp_setup("nim_langserver")
+
 
 -- Elm
 default_lsp_setup("elmls")
@@ -151,15 +213,17 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         -- go
-        null_ls.builtins.diagnostics.golangci_lint.with({
-            extra_args = {
-                "--timeout=10m", "--disable-all", "-E=misspell",
-                "-E=govet", "-E=revive", "-E=gofumpt", "-E=gosec", "-E=unparam",
-                "-E=goconst", "-E=prealloc", "-E=stylecheck", "-E=unconvert",
-                "-E=errcheck", "-E=ineffassign", "-E=unused", "-E=tparallel",
-                "-E=whitespace", "-E=staticcheck", "-E=gosimple", "-E=gocritic",
-            }
-        }),
+        null_ls.builtins.diagnostics.golangci_lint,
+        -- prefer to have a .golangci.yaml within your repository directory
+        -- .with({
+        --     extra_args = {
+        --         "--timeout=10m", "--disable-all", "-E=misspell",
+        --         "-E=govet", "-E=revive", "-E=gofumpt", "-E=gosec", "-E=unparam",
+        --         "-E=goconst", "-E=prealloc", "-E=stylecheck", "-E=unconvert",
+        --         "-E=errcheck", "-E=ineffassign", "-E=unused", "-E=tparallel",
+        --         "-E=whitespace", "-E=staticcheck", "-E=gosimple", "-E=gocritic",
+        --     }
+        -- }),
         -- null_ls.builtins.formatting.gofumpt,
         -- null_ls.builtins.formatting.goimports_reviser,
 

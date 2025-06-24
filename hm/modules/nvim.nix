@@ -81,19 +81,19 @@
       }
 
       {
-        plugin = (
-          nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-nix
-            p.tree-sitter-elm
-            p.tree-sitter-go
-            p.tree-sitter-rust
-            p.tree-sitter-vim
-            p.tree-sitter-bash
-            p.tree-sitter-lua
-            p.tree-sitter-python
-            p.tree-sitter-json
-          ])
-        );
+        plugin = nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-nim
+          p.tree-sitter-elm
+          p.tree-sitter-haskell
+          p.tree-sitter-go
+          p.tree-sitter-rust
+          p.tree-sitter-vim
+          p.tree-sitter-bash
+          p.tree-sitter-lua
+          p.tree-sitter-python
+          p.tree-sitter-json
+        ]);
       }
 
       {
@@ -105,15 +105,17 @@
       }
 
       {
-        plugin = codeium-vim;
+        plugin = windsurf-vim;
         config = ''
           vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true })
           vim.keymap.set('i', '<C-e>', function() return vim.fn['codeium#Clear']() end, { expr = true })
         '';
         type = "lua";
       }
+
     ];
 
+    # Maybe I should activate these pkgs on the code shells instead for each repo
     extraPackages = with pkgs; [
       # Nix
       nil
@@ -140,8 +142,11 @@
       shellcheck
 
       # Python
-      black
-      # pylint
+      # use nix flakes of projects
+
+      # Haskell
+      haskellPackages.haskell-language-server
+      stylish-haskell
 
       # web tools (js mostly)
       nodePackages_latest.prettier
