@@ -26,17 +26,13 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    # dev
-    go
-    gotools
-
     # dev-tools
     aichat
     master.aider-chat
+    rsync
     htop
     tree
     act # github workflow local test
-    git-lfs
 
     # fonts
     nerd-fonts.hack
@@ -52,12 +48,11 @@
     fzf
 
     # net, bluetooth, sounds...
-    rsync
     networkmanagerapplet
-    pavucontrol
     brightnessctl
+    pavucontrol
     pulsemixer
-    portaudio # for aider voice assistant
+    portaudio # for aider voice
 
     # work tools
     google-chrome
@@ -141,7 +136,7 @@
       la = "ls -a";
       l = "ls -CF";
       tmp = "nvim $(mktemp /tmp/tmpnote.XXXXXX)";
-      aider = "aider --no-auto-commits -c ~/.config/aider/config.yaml";
+      aider = "aider --no-auto-commits -c ~/.config/aider/config.yaml --model-settings-file ~/.config/aider/models.yaml";
       restoreaider = "aider --restore-chat-history";
       nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
