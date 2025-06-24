@@ -10,6 +10,7 @@ of my NixOS config and the flake of my home-manager. Otherwise, updating just on
 
 Important TODOs:
 
+- [ ] (nvim) compress implementations
 - [ ] (hypr) fix screen sharing on external monitor
 - [ ] Home-manager user for non-linux distros
 - [ ] minimal hm
