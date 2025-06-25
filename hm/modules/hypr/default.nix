@@ -154,6 +154,9 @@ in
         bind = SUPER,Tab,bringactivetotop,
 
         # Move focus with mainMod + arrow keys
+        binds {
+            movefocus_cycles_fullscreen = true
+        }
         bind = $mainMod, h, movefocus, l
         bind = $mainMod, l, movefocus, r
         bind = $mainMod, k, movefocus, u
