@@ -27,13 +27,14 @@ in
     extraConfig = ''
 
         # Monitors
-        monitor=eDP-1,1920x1200,0x0,1.2,bitdepth,10
-        monitor=HDMI-A-1,3840x2160,0x0,1.5,bitdepth,10
+        # monitor=eDP-1,1920x1200,0x0,1.2
+        # monitor=HDMI-A-1,3840x2160,0x0,1.5
+        monitor= ,preferred,0x0,1.2
 
 
         # Run the monitor switch script on startup and when triggered
         # exec = pkill waybar & sleep 0.5 && waybar &
-        exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
+        # exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
 
         # Fix slow startup
         # exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
