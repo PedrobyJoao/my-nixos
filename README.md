@@ -10,12 +10,9 @@ of my NixOS config and the flake of my home-manager. Otherwise, updating just on
 
 Important TODOs:
 
-- [ ] (nvim) compress implementations
-- [ ] (hypr) fix screen sharing on external monitor
+- [ ] minimal hm for servers
 - [ ] Home-manager user for non-linux distros
-- [ ] minimal hm
-- [ ] (hypr) improve monitor change
-- [ ] get an Oracle always free machine
+- [ ] (nvim) compress implementations
 - [ ] easy sandbox to test anything
 - [ ] tmux: can I make it smooth as my Hyprland?
   - [ ] easily create/destroy windows
@@ -26,10 +23,13 @@ TODOs:
 - [ ] suspend when idle
 - [ ] assets as submodule
 - [ ] nvim as submodule
+- [ ] get an Oracle always free machine
+- [ ] (hypr) fix screen sharing on external monitor
+- [ ] (hypr) improve monitor change
 
 Cool but not urgent:
 
-- [ ] (nvim) Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
+- [ ] hibernate
 - [ ] random wallpapers
 - [ ] (nvim) carl sagan message when open
-- [ ] hibernate
+- [ ] (nvim) Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
