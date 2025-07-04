@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { pkgs
+, pkgs-stable
 , ...
 }:
 
@@ -61,6 +62,28 @@
   virtualisation.docker.rootless = {
     enable = true;
     setSocketVariable = true;
+  };
+
+  virtualisation.containerd = {
+    enable = true;
+  };
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
+      };
+    };
   };
 
   programs.hyprland = {
@@ -125,6 +148,7 @@
         "wheel"
         "saunt"
         "docker"
+        "libvirtd"
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmXowNxl6Ie/7QFFGBXSs9qtjqgcSAp1LS8TVm1uISB"
@@ -139,12 +163,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-    qemu
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     neovim
     wget
     curl
     git
+
+    # allow UEFI within qemu
+    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+      qemu-system-x86_64 \
+        -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+        "$@"
+    '')
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
