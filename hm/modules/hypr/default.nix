@@ -33,7 +33,7 @@ in
 
 
         # Run the monitor switch script on startup and when triggered
-        # exec = pkill waybar & sleep 0.5 && waybar &
+        exec = pkill waybar & sleep 0.5 && waybar &
         # exec-once = ${scripts.monitorSwitch}/bin/monitorSwitch;
 
         # Fix slow startup
