@@ -8,20 +8,32 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    quickemu = {
+      # use this PR until it's not into release
+      url = "github:quickemu-project/quickemu?ref=pull/1640/head";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     { nixpkgs
     , nixpkgs-master
     , home-manager
+    , quickemu
     , ...
     }:
     let
       system = "x86_64-linux";
       overlay-master = final: prev: { master = nixpkgs-master.legacyPackages.${system}; };
+      overlay-quickemu = final: prev: {
+        inherit (quickemu.packages.${system}) quickemu;
+      };
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ overlay-master ];
+        overlays = [
+          overlay-master
+          overlay-quickemu
+        ];
       };
     in
     {

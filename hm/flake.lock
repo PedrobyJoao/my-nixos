@@ -1,5 +1,19 @@
 {
   "nodes": {
+    "flake-schemas": {
+      "locked": {
+        "lastModified": 1721999734,
+        "narHash": "sha256-G5CxYeJVm4lcEtaO87LKzOsVnWeTcHGKbKxNamNWgOw=",
+        "rev": "0a5c42297d870156d9c57d8f99e476b738dcd982",
+        "revCount": 75,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/flake-schemas/0.1.5/0190ef2f-61e0-794b-ba14-e82f225e55e6/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/DeterminateSystems/flake-schemas/%2A.tar.gz"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -52,11 +66,34 @@
         "type": "github"
       }
     },
+    "quickemu": {
+      "inputs": {
+        "flake-schemas": "flake-schemas",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746022733,
+        "narHash": "sha256-Z2etN0w9xZBX1Ir6Epi/c3KyBSjVHi1yjL4BTq+eZ4s=",
+        "owner": "quickemu-project",
+        "repo": "quickemu",
+        "rev": "8fad1b9370bf4f825614fa161a41e5e5815665f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "quickemu-project",
+        "ref": "pull/1640/head",
+        "repo": "quickemu",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-master": "nixpkgs-master"
+        "nixpkgs-master": "nixpkgs-master",
+        "quickemu": "quickemu"
       }
     }
   },

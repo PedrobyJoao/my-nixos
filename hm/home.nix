@@ -32,7 +32,8 @@
     rsync
     htop
     tree
-    act # github workflow local test
+    # act -  github workflow local test
+    quickemu
 
     # fonts
     nerd-fonts.hack
