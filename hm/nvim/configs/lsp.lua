@@ -57,7 +57,11 @@ lsp.nil_ls.setup({
 default_lsp_setup("gopls")
 
 -- Haskell
-default_lsp_setup("hls")
+lsp.hls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}
 
 -- Lua
 local runtime_path = vim.split(package.path, ";")

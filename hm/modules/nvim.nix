@@ -142,11 +142,10 @@
       shellcheck
 
       # Python
+      pyright
       # use nix flakes of projects
 
-      # Haskell
-      haskellPackages.haskell-language-server
-      stylish-haskell
+      # Haskell: load from within projects flakes
 
       # web tools (js mostly)
       nodePackages_latest.prettier
