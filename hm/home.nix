@@ -33,14 +33,13 @@
     htop
     tree
     # act -  github workflow local test
-    quickemu
 
     # fonts
     nerd-fonts.hack
     nerd-fonts.jetbrains-mono
 
     # desktop env tools
-    rofi-wayland
+    rofi
     wl-clipboard
     xdg-utils
     dunst
@@ -122,8 +121,6 @@
       bind '"\C-x\C-e": edit-and-execute-command'
 
       eval "$(fzf --bash)"
-
-      export NUNET="/home/orolo/lab/nunet"
     '';
 
     shellAliases = {

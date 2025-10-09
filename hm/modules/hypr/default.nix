@@ -103,10 +103,6 @@ in
             new_window_takes_over_fullscreen = 2
         }
 
-        gestures {
-            workspace_swipe = false
-        }
-
         windowrule=center,class:rofi,title:rofi
         windowrule=float,class:rofi,title:rofi
         windowrule=float,class:blueman-manager,title:blueman-manager
