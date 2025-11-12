@@ -202,51 +202,6 @@
     "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.glibc}/lib64/ld-linux-x86-64.so.2"
   ];
 
-  # Daily poweroff at 21:00
-  systemd.services.poweroff-at-2100 = {
-    description = "Power off at 21:00 daily";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.systemd}/bin/systemctl poweroff";
-    };
-  };
-
-  systemd.timers.poweroff-at-2100 = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "21:00";
-      Persistent = false; # do not power off immediately if a run was missed
-      Unit = "poweroff-at-2100.service";
-    };
-  };
-
-  # Hourly lock for stretch breaks (user session)
-  systemd.user.services.hyprlock-hourly = {
-    description = "Lock screen hourly for stretch break";
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStartPre = [
-        "${pkgs.libnotify}/bin/notify-send 'Stretch break' 'Locking screen in 20s' -u critical"
-        "${pkgs.coreutils}/bin/sleep 20"
-      ];
-      ExecStart = "${pkgs.hyprland}/bin/hyprctl dispatch exec ${pkgs.hyprlock}/bin/hyprlock";
-    };
-  };
-
-  systemd.user.timers.hyprlock-hourly = {
-    description = "Trigger hyprlock hourly";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "hourly";
-      Persistent = true; # if missed, trigger shortly after login
-      Unit = "hyprlock-hourly.service";
-    };
-  };
-
-  # Ensure user units are restarted on switch
-  # systemd.user.startServices = "sd-switch";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

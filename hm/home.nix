@@ -6,6 +6,7 @@
     ./modules/nvim.nix
     ./modules/alacritty.nix
     ./modules
+    ./services.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -32,6 +33,7 @@
     rsync
     htop
     tree
+    gnumake
     # act -  github workflow local test
 
     # fonts
@@ -170,6 +172,11 @@
       package = pkgs.bibata-cursors;
     };
   };
+
+  # Ensure user units are (re)started on switch
+  systemd.user.startServices = "sd-switch";
+
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
