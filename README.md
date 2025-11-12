@@ -1,17 +1,13 @@
-My NixOS config with standalone Home-Manager.
-
-> If you're using a standalone home-manager installation,
-> everytime you update the flake of your hm, you shall update
-> the flake of your NixOS config too.
+My NixOS config with a standalone Home-Manager.
 
 ### TODOs
 
 Important TODOs:
 
-- [ ] minimal hm for servers
-- [ ] Home-manager user for non-linux distros
-- [ ] (nvim) compress implementations
+- [ ] Home-manager user for non-nixos distros
+  - [ ] minimal hm for servers
 - [ ] easy sandbox to test anything
+- [ ] (nvim) compress implementations
 - [ ] tmux: can I make it smooth as my Hyprland?
   - [ ] easily create/destroy windows
   - [ ] easy navigation pages/tabs(idk)
