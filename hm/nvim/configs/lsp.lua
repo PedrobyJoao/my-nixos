@@ -164,31 +164,7 @@ default_lsp_setup("nim_langserver")
 default_lsp_setup("elmls")
 
 -- Typescript
--- nvim_lsp.tsserver.setup({
--- 	init_options = require("nvim-lsp-ts-utils").init_options,
--- 	on_attach = function(client, bufnr)
--- 		on_attach(client, bufnr)
---
--- 		-- Let eslint format
--- 		client.server_capabilities.document_formatting = false
--- 		client.server_capabilities.document_range_formatting = false
---
--- 		local ts_utils = require("nvim-lsp-ts-utils")
--- 		ts_utils.setup({
--- 			enable_import_on_completion = true,
--- 		})
--- 		ts_utils.setup_client(client)
---
--- 		-- Mappings.
--- 		local opts = { noremap = true, silent = true, buffer = true }
--- 		require("legendary").keymaps({
--- 			{ "gto", ":TSLspOrganize<CR>", description = "LSP: Organize imports", opts = opts },
--- 			{ "gtr", ":TSLspRenameFile<CR>", description = "LSP: Rename file", opts = opts },
--- 			{ "gti", ":TSLspImportAll<CR>", description = "LSP: Import missing imports", opts = opts },
--- 		})
--- 	end,
--- 	capabilities = capabilities,
--- })
+default_lsp_setup("ts_ls")
 
 -- web
 -- ESLint
