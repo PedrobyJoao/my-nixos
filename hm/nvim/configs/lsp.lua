@@ -31,43 +31,34 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ float =  { border = "single" }})<CR>', opts)
 end
 
-local lsp = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Enable Language Servers
-local function default_lsp_setup(module)
-    lsp[module].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-    })
-end
+vim.lsp.config("*", {
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
 -- Nix
-lsp.nil_ls.setup({
+vim.lsp.config("nil_ls", {
     on_attach = function(client, bufnr)
         on_attach(client, bufnr)
 
         -- Let statix format
-        client.server_capabilities.document_formatting = false
-        client.server_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end,
 })
 
--- Go
-default_lsp_setup("gopls")
-
 -- Haskell
-lsp.hls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+vim.lsp.config("hls", {
     filetypes = { 'haskell', 'lhaskell', 'cabal' },
-}
+})
 
 -- Lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-lsp.lua_ls.setup({
+vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             runtime = {
@@ -94,8 +85,6 @@ lsp.lua_ls.setup({
             },
         },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
 })
 
 local function set_python_path(opts)
@@ -115,7 +104,7 @@ local function set_python_path(opts)
     end
 end
 
-lsp.pyright.setup({
+vim.lsp.config("pyright", {
     cmd = { 'pyright-langserver', '--stdio' },
     filetypes = { 'python' },
     root_markers = {
@@ -152,23 +141,11 @@ lsp.pyright.setup({
             complete = 'file',
         })
     end,
-    capabilities = capabilities,
 })
-
-
--- Nim
-default_lsp_setup("nim_langserver")
-
-
--- Elm
-default_lsp_setup("elmls")
-
--- Typescript
-default_lsp_setup("ts_ls")
 
 -- web
 -- ESLint
-lsp.eslint.setup({
+vim.lsp.config("eslint", {
     on_attach = function(client, bufnr)
         on_attach(client, bufnr)
         -- Run all eslint fixes on save
@@ -179,14 +156,22 @@ lsp.eslint.setup({
             augroup END
             ]])
     end,
-    capabilities = capabilities,
 })
--- CSS
-default_lsp_setup("cssls")
--- HTML
-default_lsp_setup("html")
--- JSON
-default_lsp_setup("jsonls")
+
+vim.lsp.enable({
+    "nil_ls",
+    "gopls",
+    "hls",
+    "lua_ls",
+    "pyright",
+    "nim_langserver",
+    "elmls",
+    "ts_ls",
+    "eslint",
+    "cssls",
+    "html",
+    "jsonls",
+})
 
 -- Null
 local null_ls = require("null-ls")
