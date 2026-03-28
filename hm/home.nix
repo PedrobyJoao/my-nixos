@@ -28,13 +28,19 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     # dev-tools
+    opencode
     aichat
     master.aider-chat
     rsync
     htop
     tree
     gnumake
-    # act -  github workflow local test
+    jq
+
+    # net
+    dnsutils
+    net-tools
+    nmap
 
     # fonts
     nerd-fonts.hack
@@ -155,14 +161,6 @@
 
   programs.lazygit = {
     enable = true;
-    settings = {
-      git = {
-        paging = {
-          colorArg = "always";
-          pager = "delta --dark --paging=never";
-        };
-      };
-    };
   };
 
   gtk = {
@@ -175,8 +173,6 @@
 
   # Ensure user units are (re)started on switch
   systemd.user.startServices = "sd-switch";
-
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

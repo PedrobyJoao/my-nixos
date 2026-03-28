@@ -13,6 +13,8 @@
       url = "github:quickemu-project/quickemu?ref=pull/1640/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    opencode.url = "github:anomalyco/opencode";
   };
 
   outputs =
@@ -20,6 +22,7 @@
     , nixpkgs-master
     , home-manager
     , quickemu
+    , opencode
     , ...
     }:
     let
@@ -28,11 +31,15 @@
       overlay-quickemu = final: prev: {
         inherit (quickemu.packages.${system}) quickemu;
       };
+      overlay-opencode = final: prev: {
+        opencode = opencode.packages.${system}.default;
+      };
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
           overlay-master
           overlay-quickemu
+          overlay-opencode
         ];
       };
     in
