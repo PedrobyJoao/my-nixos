@@ -32,7 +32,13 @@
         inherit (quickemu.packages.${system}) quickemu;
       };
       overlay-opencode = final: prev: {
-        opencode = opencode.packages.${system}.default;
+        # TODO: temporary fix because opencode is loading UI together with CLI
+        opencode = opencode.packages.${system}.default.overrideAttrs (old: {
+          postPatch = (old.postPatch or "") + ''
+            substituteInPlace packages/opencode/script/build.ts \
+              --replace-warn 'await createEmbeddedWebUIBundle()' 'console.log("Skipping Web UI build")'
+          '';
+        });
       };
       pkgs = import nixpkgs {
         inherit system;

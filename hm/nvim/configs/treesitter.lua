@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter').setup {
     -- COMMENT IF NIX
     -- ensure_installed = { "help", "bash", "go", "lua", "c", "javascript", "json", "python", "typescript", "tsx", "css", "rust", "java", "yaml", "markdown", "markdown_inline" }, -- one of "all" or a list of languages
 
