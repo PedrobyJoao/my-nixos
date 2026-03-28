@@ -95,8 +95,6 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk
-      # xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland
     ];
   };
@@ -201,7 +199,6 @@
   systemd.tmpfiles.rules = [
     "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.glibc}/lib64/ld-linux-x86-64.so.2"
   ];
-
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

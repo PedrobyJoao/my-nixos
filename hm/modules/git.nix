@@ -14,6 +14,7 @@ in
       };
     };
 
+    signing.format = "openpgp";
     lfs.enable = true;
   };
 }
