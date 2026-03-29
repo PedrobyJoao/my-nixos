@@ -100,12 +100,12 @@ in
 
 
         misc {
-            new_window_takes_over_fullscreen = 2
+            on_focus_under_fullscreen = 2
         }
 
-        windowrule=center,class:rofi,title:rofi
-        windowrule=float,class:rofi,title:rofi
-        windowrule=float,class:blueman-manager,title:blueman-manager
+        windowrule=center on,match:class rofi,match:title rofi
+        windowrule=float on,match:class rofi,match:title rofi
+        windowrule=float on,match:class blueman-manager,match:title blueman-manager
 
         $mainMod = SUPER
 
