@@ -30,14 +30,14 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     # dev-tools
-    opencode
+    # opencode
     aichat
-    master.aider-chat
     rsync
     htop
     tree
     gnumake
     jq
+    python3
 
     # net
     dnsutils

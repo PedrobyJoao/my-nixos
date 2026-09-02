@@ -34,9 +34,16 @@
       overlay-opencode = final: prev: {
         # TODO: temporary fix because opencode is loading UI together with CLI
         opencode = opencode.packages.${system}.default.overrideAttrs (old: {
-          postPatch = (old.postPatch or "") + ''
-            substituteInPlace packages/opencode/script/build.ts \
-              --replace-warn 'await createEmbeddedWebUIBundle()' 'console.log("Skipping Web UI build")'
+          # postPatch = (old.postPatch or "") + ''
+          #   substituteInPlace packages/opencode/script/build.ts \
+          #     --replace-warn 'await createEmbeddedWebUIBundle()' 'console.log("Skipping Web UI build")'
+          # '';
+          #
+          preBuild = (old.preBuild or "") + ''
+            substituteInPlace packages/opencode/src/cli/cmd/generate.ts \
+              --replace-fail 'const prettier = await import("prettier")' 'const prettier: any = { format: async (s: string) => s }' \
+              --replace-fail 'const babel = await import("prettier/plugins/babel")' 'const babel = {}' \
+              --replace-fail 'const estree = await import("prettier/plugins/estree")' 'const estree = {}'
           '';
         });
       };

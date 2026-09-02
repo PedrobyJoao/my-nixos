@@ -147,7 +147,7 @@
       # Haskell: load from within projects flakes
 
       # web tools (js mostly)
-      nodePackages_latest.prettier
+      prettier
       eslint_d
 
       # Telescope tools
