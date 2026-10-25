@@ -43,10 +43,7 @@
     dnsutils
     net-tools
     nmap
-
-    # fonts
-    nerd-fonts.hack
-    nerd-fonts.jetbrains-mono
+    iftop
 
     # desktop env tools
     rofi
@@ -62,15 +59,17 @@
     brightnessctl
     pavucontrol
     pulsemixer
-    portaudio # for aider voice
-
-    # work tools
-    google-chrome
-    slack
+    portaudio
 
     # others
+    google-chrome
     brave
     discord
+    fastfetch
+
+    # fonts
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
