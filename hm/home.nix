@@ -30,7 +30,7 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     # dev-tools
-    # opencode
+    opencode
     aichat
     rsync
     htop
