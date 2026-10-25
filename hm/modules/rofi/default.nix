@@ -2,7 +2,7 @@
 {
   programs.rofi = {
     # enable = true;
-    terminal = "${pkgs.cool-retro-term}/bin/cool-retro-term";
+    settings.terminal = "${pkgs.cool-retro-term}/bin/cool-retro-term";
     theme = "gruvbox-light";
   };
 

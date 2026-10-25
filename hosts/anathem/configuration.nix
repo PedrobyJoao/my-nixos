@@ -92,12 +92,7 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
-  };
+  xdg.portal.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
