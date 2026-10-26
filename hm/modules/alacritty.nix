@@ -30,6 +30,7 @@
           instance = "Alacritty";
           general = "Alacritty";
         };
+        opacity = 0.85;
       };
 
       scrolling = {
