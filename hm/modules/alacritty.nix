@@ -56,7 +56,7 @@
           family = "Hack Nerd Font Mono";
           style = "Italic";
         };
-        size = 10.0;
+        size = 11.0;
       };
 
       colors = {
