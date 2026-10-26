@@ -145,8 +145,9 @@
       nunet = "cd ~/lab/nunet";
       vdots = "nvim ~/my-nixos";
       grm = "go run main.go";
-      ais = "aichat -s temp --code";
-      ai = "aichat -s temp --role simple";
+      ai = "cd ~/tmp-opencode/ && opencode mini"; # opencode mini as chatbot instead of aichat
+      # ais = "aichat -s temp --code";
+      aichat = "aichat -s temp --role simple";
       pm = "pulsemixer";
       kcc = "nix run github:NixOS/nixpkgs/3eaeaeb6b1e08a016380c279f8846e0bd8808916#kcc";
     };
