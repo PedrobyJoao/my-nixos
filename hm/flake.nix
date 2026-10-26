@@ -15,6 +15,11 @@
     };
 
     opencode.url = "github:anomalyco/opencode";
+
+    assets = {
+      url = "github:PedrobyJoao/assets";
+      flake = false;
+    };
   };
 
   outputs =
@@ -23,6 +28,7 @@
     , home-manager
     , quickemu
     , opencode
+    , assets
     , ...
     }:
     let
@@ -42,7 +48,7 @@
     {
       homeConfigurations."orolo" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit opencode; };
+        extraSpecialArgs = { inherit opencode assets; };
         modules = [ ./home.nix ];
       };
     };

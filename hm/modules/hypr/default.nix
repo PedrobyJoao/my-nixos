@@ -1,6 +1,7 @@
 { config
 , lib
 , pkgs
+, assets
 , ...
 }:
 let
@@ -10,7 +11,6 @@ in
   imports = [
     ./hyprland-environment.nix
     ./hyprlock.nix
-    # ./hypridle.nix
   ];
 
   home.packages = with pkgs; [
@@ -18,7 +18,23 @@ in
     hyprshot
     wlr-randr
     bibata-cursors
+    hyprpaper
   ];
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      wallpaper = [
+        {
+          monitor = "";
+          path = "${assets}/wallpapers-1920x1200";
+          timeout = 3600;
+        }
+      ];
+    };
+
+  };
 
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   wayland.windowManager.hyprland = {

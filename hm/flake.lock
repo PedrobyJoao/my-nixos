@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "assets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792997791,
+        "narHash": "sha256-ECP+zFZJo+QCCSwb/Vfoxf473b4hZDOq2UGcn4xAVPg=",
+        "owner": "PedrobyJoao",
+        "repo": "assets",
+        "rev": "ac1f1d9013fee793009dad91dca9b09b3d3dfd4c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PedrobyJoao",
+        "repo": "assets",
+        "type": "github"
+      }
+    },
     "flake-schemas": {
       "locked": {
         "lastModified": 1721999734,
@@ -52,11 +68,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1792930473,
-        "narHash": "sha256-hkmxK7q+XyhU+dNgwdwTWZzBBPAqhRAT/TYkYD/CFyM=",
+        "lastModified": 1792997288,
+        "narHash": "sha256-EIOkk13m2rrmEFIUm2eFcMCg4gSVv5UhfHg/2y79jVA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e41afe0285daffa39f5aa32fd215723d2a7b557b",
+        "rev": "cdc78168782bd688756039cc6eeb79868ce8e80b",
         "type": "github"
       },
       "original": {
@@ -87,11 +103,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1792931261,
-        "narHash": "sha256-5q6LXNTSllcsbepSlJtbIW23QEalwKeCrr3osSu9gVA=",
+        "lastModified": 1792996412,
+        "narHash": "sha256-Q1Lisi+H6a/DWLbSIFBCDWKnxscLEgtkKirHT0Dxkgc=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "2432058fdb6dd42ae4d58336967c27ba183bd680",
+        "rev": "ed74ec82ce1fe3a36da6c0815a935473ef4bb0fb",
         "type": "github"
       },
       "original": {
@@ -124,6 +140,7 @@
     },
     "root": {
       "inputs": {
+        "assets": "assets",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-master": "nixpkgs-master",

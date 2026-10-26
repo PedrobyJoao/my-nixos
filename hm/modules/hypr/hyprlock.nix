@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs
+, assets
+, ...
+}:
 {
   programs.hyprlock = {
     enable = true;
@@ -12,7 +16,7 @@
 
       background = [
         {
-          path = "${../../../assets/wallpapers-1920x1200}";
+          path = "${assets}/wallpapers-1920x1200/anathem.jpg_large";
           blur_passes = 1;
           contrast = 0.8916;
           brightness = 0.8172;

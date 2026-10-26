@@ -8,22 +8,19 @@ Important TODOs:
   - [ ] minimal hm for servers
 - [ ] easy sandbox to test anything
 - [ ] (nvim) compress implementations
-- [ ] tmux: can I make it smooth as my Hyprland?
-  - [ ] easily create/destroy windows
-  - [ ] easy navigation pages/tabs(idk)
 
 TODOs:
 
 - [ ] suspend when idle
-- [ ] assets as submodule
+- [x] assets as ~submodule~ flake input
 - [ ] nvim as submodule
 - [ ] get an Oracle always free machine
-- [ ] (hypr) fix screen sharing on external monitor
-- [ ] (hypr) improve monitor change
+- [ ] tmux: can I make it smooth as my Hyprland?
+  - [ ] easily create/destroy windows
+  - [ ] easy navigation pages/tabs(idk)
 
 Cool but not urgent:
 
 - [ ] hibernate
-- [ ] random wallpapers
+- [x] random wallpapers
 - [ ] (nvim) carl sagan message when open
-- [ ] (nvim) Terminal integration, maybe with tmux (fullscreen styled as Taelin's)
