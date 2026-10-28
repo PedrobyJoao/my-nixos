@@ -23,12 +23,3 @@ Paths are relative to the repository root.
 - Check imports before assuming a module is active. Home Manager imports
   are in `hm/home.nix` and `hm/modules/default.nix`.
 - Do not update flake lock files or change `stateVersion` unless requested.
-
-## Validation
-
-Build the configuration affected by the change without activating it:
-
-- NixOS: `nix build .#nixosConfigurations.anathem.config.system.build.toplevel`
-- Home Manager: `nix build ./hm#homeConfigurations.orolo.activationPackage`
-
-Report which checks were run and any failures or checks not performed.
