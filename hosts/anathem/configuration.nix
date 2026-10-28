@@ -57,6 +57,12 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # The ELAN touchpad otherwise wakes this laptop immediately from s2idle.
+  # Keep keyboard, lid, and power-button wake available.
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="i2c", KERNEL=="i2c-ELAN0683:00", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+  '';
+
   # virtualisation
   virtualisation.docker.enable = true;
   virtualisation.docker.rootless = {
@@ -133,6 +139,7 @@
         "saunt"
         "docker"
         "libvirtd"
+        # "dialout"
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmXowNxl6Ie/7QFFGBXSs9qtjqgcSAp1LS8TVm1uISB"

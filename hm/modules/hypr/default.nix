@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./hyprland-environment.nix
+    ./hypridle.nix
     ./hyprlock.nix
   ];
 

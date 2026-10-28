@@ -31,7 +31,7 @@
   home.packages = with pkgs; [
     # dev-tools
     opencode
-    aichat
+    # aichat
     rsync
     htop
     tree

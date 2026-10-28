@@ -4,11 +4,11 @@ My NixOS config with a standalone Home-Manager.
 
 Important TODOs:
 
-- [ ] suspend when idle
 - [ ] Home-manager user for non-nixos distros
   - [ ] minimal hm for servers
 - [ ] easy sandbox to test anything
 - [ ] (nvim) compress implementations
+- [x] suspend when idle
 
 TODOs:
 
