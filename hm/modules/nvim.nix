@@ -36,11 +36,11 @@
       none-ls-nvim
       lspkind-nvim
 
-      {
-        plugin = Coqtail;
-        config = builtins.readFile ../nvim/configs/coq.lua;
-        type = "lua";
-      }
+      # {
+      #   plugin = Coqtail;
+      #   config = builtins.readFile ../nvim/configs/coq.lua;
+      #   type = "lua";
+      # }
 
       {
         plugin = nvim-lspconfig;
@@ -80,6 +80,7 @@
 
       {
         plugin = nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-c
           p.tree-sitter-nix
           p.tree-sitter-nim
           p.tree-sitter-elm
@@ -135,7 +136,10 @@
       # lua54Packages.luacheck
 
       # elm
-      elmPackages.elm-language-server
+      # elmPackages.elm-language-server
+
+      # C
+      clang-tools
 
       # Shell scripting
       shellcheck
@@ -145,6 +149,10 @@
       # use nix flakes of projects
 
       # Haskell: load from within projects flakes
+      # pkgs.zlib
+      # hsPkgs.ghc
+      # hsPkgs.haskell-language-server
+      # hsPkgs.cabal-install
 
       # web tools (js mostly)
       prettier
