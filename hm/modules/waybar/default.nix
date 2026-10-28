@@ -26,7 +26,7 @@
           "cpu"
           "temperature"
           "pulseaudio"
-          "custom/keyboard-layout"
+          "hyprland/language"
           "tray"
         ];
 
@@ -75,12 +75,12 @@
           };
         };
 
-        "custom/keyboard-layout" = {
-          exec = "hyprctl devices | grep -m1 'Active Keyboard Layout' | awk '{print $4}'";
-          interval = 30;
+        "hyprland/language" = {
           format = "  {}";
-          signal = 1;
-          tooltip = false;
+          format-en = "US";
+          format-pt = "BR";
+          keyboard-name = "at-translated-set-2-keyboard";
+          tooltip = true;
         };
 
         memory = {

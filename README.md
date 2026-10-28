@@ -4,6 +4,7 @@ My NixOS config with a standalone Home-Manager.
 
 Important TODOs:
 
+- [ ] suspend when idle
 - [ ] Home-manager user for non-nixos distros
   - [ ] minimal hm for servers
 - [ ] easy sandbox to test anything
@@ -11,9 +12,7 @@ Important TODOs:
 
 TODOs:
 
-- [ ] suspend when idle
 - [x] assets as ~submodule~ flake input
-- [ ] nvim as submodule
 - [ ] get an Oracle always free machine
 - [ ] tmux: can I make it smooth as my Hyprland?
   - [ ] easily create/destroy windows
@@ -21,6 +20,6 @@ TODOs:
 
 Cool but not urgent:
 
-- [ ] hibernate
-- [x] random wallpapers
 - [ ] (nvim) carl sagan message when open
+- [x] random wallpapers
+- [ ] hibernate

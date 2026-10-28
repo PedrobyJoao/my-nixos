@@ -67,10 +67,11 @@ in
 
         source = /home/orolo/.config/hypr/colors
 
-        # Set en layout at startup
-
         # Input config
         input {
+            # US first (default), Brazilian Portuguese with dead keys second.
+            # Important: if you customize .XComposer, defaults might miss
+            # and then dead keys won't work (probably other keyboard issues as well)
             kb_layout = us,br
             kb_variant =
             kb_model =
@@ -140,8 +141,8 @@ in
         bind = $mainMod, C, exec, hyprlock
         bindl=,switch:Lid Switch, exec, hyprlock
 
-        # Switch Keyboard Layouts
-        bind = $mainMod, o, exec, hyprctl switchxkblayout keyboard-k380-keyboard next
+        # Switch US/Brazilian layouts on all connected keyboards.
+        bind = $mainMod, O, exec, hyprctl switchxkblayout all next
 
         # Switch monitor
         bind = $mainMod CTRL SHIFT, S, exec, ${scripts.monitorSwitch}/bin/monitorSwitch
