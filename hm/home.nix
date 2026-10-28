@@ -155,7 +155,7 @@
 
   programs.starship = {
     enable = true;
-    settings = pkgs.lib.importTOML ./extras/starship.toml;
+    settings = pkgs.lib.importTOML ./modules/starship.toml;
   };
 
   programs.lazygit = {
