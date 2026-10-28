@@ -5,12 +5,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+
+    breakd.url = "github:simonwinther/breakd";
   };
 
   outputs =
     { self
     , nixpkgs
     , nixpkgs-stable
+    , breakd
     ,
     }@inputs:
     let
@@ -30,6 +33,9 @@
           };
           modules = [
             ./hosts/anathem/configuration.nix
+            breakd.nixosModules.default
+            ({ ... }: { services.breakd.enable = true; })
+
           ];
         };
       };
