@@ -31,6 +31,7 @@ in
           monitor = "";
           path = "${assets}/wallpapers-1920x1200";
           timeout = 3600;
+          order = "random-shuffle";
         }
       ];
     };
